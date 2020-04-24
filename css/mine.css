@@ -1,0 +1,299 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.header{
+	width: 100%;
+	height: 1.5rem;
+	background: #5A4F60;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.portrait_img{
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 50%;
+	margin-left: 0.3rem;
+}
+
+.name_phone_mealType{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.15rem;
+}
+
+.name_phone{
+	display: flex;
+	flex-direction: column;
+}
+
+.name_phone .name{
+	font-size: 0.24rem;
+	color: #fff;
+	padding-bottom: 0.1rem;
+}
+
+.name_phone .phone{
+	font-size: 0.2rem;
+	padding: 0.03rem 0.13rem;
+	display: flex;
+	align-items: center;
+	background: #696CC9;
+	border-radius: 0.3rem;
+	color: #fff;
+}
+
+.message_setUp{
+	display: flex;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.message{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.35rem;
+}
+
+.message a{
+	display: flex;
+	flex-direction: column;
+	width:100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	text-decoration: none;
+}
+
+.message img{
+	width: 0.35rem;
+	height: 0.35rem;
+}
+
+.messageName{
+	font-size: 0.18rem;
+	color: #fff;
+	padding-top: 0.1rem;
+}
+
+.myOrder{
+	width: 100%;
+	background: #fff;
+	margin-top: 0.1rem;
+}
+
+.myOrderTop{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	display: flex;
+	position: relative;
+	border-bottom: 0.01rem solid #EEEEEE;
+}
+
+.myOrderTop a{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	text-decoration: none;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.myOrderTop_title{
+	font-size: 0.22rem;
+	color: #333;
+	font-weight: bold;
+	padding-left: 0.2rem;
+}
+
+.quanbu{
+	display: flex;
+	position: absolute;
+	right: 0.3rem;
+	align-items: center;
+}
+
+.allMyOrder{
+	font-size: 0.22rem;
+	color: #666;
+}
+
+.youjiantou{
+	width: 0.13rem;
+	height: 0.13rem;
+	border-top: 0.02rem solid #666;
+	border-right: 0.02rem solid #666;
+	transform: rotate(45deg);
+}
+
+.order_classification{
+	width: 100%;
+	height: 1.6rem;
+	display: flex;
+}
+
+.orderItem{
+	width: 25%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.orderItem a{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.orderItem img{
+	width: 0.4rem;
+	height: 0.4rem;
+}
+
+.orderItemName{
+	font-size: 0.18rem;
+	color: #333;
+	padding-top: 0.1rem;
+}
+
+.account{
+	width: 100%;
+	margin-top: 0.1rem;
+	background: #fff;
+}
+
+.balance{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.balance_money{
+	font-size: 0.22rem;
+	color: #676767;
+	padding-left: 0.2rem;
+}
+
+.balance_money b{
+	padding-left: 0.1rem;
+	color: #333;
+}
+
+.cashWithdrawal{
+	font-size: 0.22rem;
+	position: absolute;
+	right: 0.3rem;
+	text-decoration: none;
+	padding: 0 0.25rem;
+	height: 0.45rem;
+	line-height: 0.45rem;
+	border: 1px solid #45A57F;
+	color: #45A57F;
+	border-radius: 0.225rem;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.accountClassification{
+	width: 100%;
+	display: flex;
+	padding-bottom: 0.2rem;
+}
+
+.accountItem{
+	width: 30%;
+	height: 1.3rem;
+	box-shadow: 0 0 0.05rem #DCDCDC;
+	margin-left: 2.5%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.accountItem a{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.accountItem img{
+	width: 0.4rem;
+	height: 0.4rem;
+}
+
+.accountName{
+	font-size: 0.18rem;
+	color: #3E3E3E;
+	padding-top: 0.15rem;
+}
+
+.loanAccount{
+	width: 100%;
+	margin-top: 0.1rem;
+	background: #fff;
+}
+
+.asd{
+	width: 100%;
+	height: 1.1rem;
+}
+
+.myApplication{
+	width: 100%;
+	margin-top: 0.1rem;
+	background: #fff;
+}
+
+.application{
+	width: 100%;
+	display: inline-block;
+}
+
+.applicationItem{
+	width: 25%;
+	height: 1.3rem;
+	float: left;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.applicationItem a{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.applicationItem img{
+	width: 0.4rem;
+	height: 0.4rem;
+}

@@ -1,0 +1,297 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.header{
+	width: 100%;
+	height: 1.5rem;
+	background: #5A4F60;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.portrait_img{
+	width: 0.8rem;
+	height: 0.8rem;
+	border-radius: 50%;
+	margin-left: 0.3rem;
+}
+
+.name_phone_mealType{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.15rem;
+}
+
+.name_phone{
+	display: flex;
+}
+
+.name_phone .name{
+	font-size: 0.24rem;
+	color: #fff;
+}
+
+.header_right{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	align-items: center;
+	right: 0.3rem;
+	margin-top: -0.1rem;
+}
+
+.header_right a{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.header_right img{
+	width: 0.3rem;
+	height: 0.3rem;
+	margin-top: -0.05rem;
+}
+
+.shop{
+	font-size: 0.18rem;
+	color: #FFFFFF;
+	margin-top: 0.05rem;
+}
+
+.chakandianpu{
+	display: flex;
+	width: 100%;
+	height: 0.8rem;
+	align-items: center;
+	background: #FFFFFF;
+	margin-top: 0.1rem;
+	position: relative;
+	align-items: center;
+}
+
+.chakandianpu a{
+	display: flex;
+	text-decoration: none;
+	color: #000000;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.chakandianpu_title{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+}
+
+.chakandianpu_title b{
+	font-weight: normal;
+	color: #26BB76;
+	padding: 0 0.05rem;
+}
+
+.chakandianpu a img{
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.extension{
+	width: 100%;
+	height: 1.2rem;
+	margin-top: 0.1rem;
+	background: #fff;
+	display: flex;
+}
+
+.extension_shop{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.extension_shop a{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.extension_shop img{
+	width: 0.4rem;
+	height: 0.4rem;
+}
+
+.extension_shop_title{
+	font-size: 0.22rem;
+	color: #111111;
+	padding-top: 0.12rem;
+}
+
+.order{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.1rem;
+	background: #fff;
+}
+
+.order_classification{
+	display: flex;
+	justify-content: center;
+}
+
+.filter{
+	font-size: 0.22rem;
+	margin: 0.15rem 0.3rem;
+	padding-bottom: 0.05rem;
+	color: #7B7B7B;
+
+}
+
+.active{
+	border-bottom: 0.03rem solid #26BB76;
+	color: #000;
+}
+
+.orderNum{
+	width: 100%;
+	height: 1.2rem;
+	display: flex;
+	margin-left: 0.5%;
+	padding-bottom: 0.15rem;
+}
+
+.orderNumItem{
+	width: 46.5%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 2%;
+	border-radius: 0.1rem;
+	background: #F8F8F8;
+	justify-content: center;
+}
+
+.orderNumItem a{
+	display: flex;
+	flex-direction: column;
+	text-decoration: none;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+}
+
+.orderNum_price{
+	font-size: 0.26rem;
+	padding-left: 0.3rem;
+	font-weight: bold;
+	color: #010101;
+}
+
+.title_img{
+	display: flex;
+	position: relative;
+}
+
+.orderNum_title{
+	font-size: 0.20rem;
+	color: #5E5E5E;
+	padding-left: 0.3rem;
+}
+
+.title_img img{
+	width: 0.4rem;
+	height: 0.4rem;
+	position: absolute;
+	right: 0.3rem;
+	margin-top: -0.14rem;
+}
+
+#login{
+    display:none;
+    width:100%;
+    height:2.5rem;
+    position:absolute;
+    top:70%;
+    margin-top:-125px;
+    z-index: 100;
+    border-radius: 0.15rem;
+}
+
+#mask{
+    display:none;
+    background:rgba(0,0,0,0.5);
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index: 10;
+}
+
+.quxiao_quding{
+	width: 100%;
+	display: flex;
+	float: left;
+}
+
+.quxiao_quding .asd{
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.asd img{
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+}
+
+.quxiao{
+	font-size: 0.2rem;
+	color: #fff;
+	padding-top: 0.2rem;
+}
+
+.queding{
+	font-size: 0.2rem;
+	color: #fff;
+	padding-top: 0.1rem;
+}
+
+.guanbi{
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 2.5rem;
+}
+
+.guanbi img {
+	width: 0.5rem;
+	height: 0.5rem;
+}
+
+#copy{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}

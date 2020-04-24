@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+    <link rel="stylesheet" type="text/css" href="css/cashier.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/methods.js"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+    <title>收银台</title>
+    <style>
+        .layui-m-layer1 .layui-m-layerchild{
+            width: 60%;
+        }
+    </style>
+</head>
+<body>
+   <div id="app">
+        <div class="price">
+            <span class="moneyy">￥{{price}}</span>
+        </div>
+        <div class="cashierClassfication active">
+            <span class="fangshi">微信付款</span>
+        </div>
+        <div class="cashierClassfication" id="second">
+            <span class="fangshi">余额扣除</span>
+        </div>
+        <div class="submit">
+            <button @click="submit">确认付款</button>
+        </div>
+   </div>
+</body>
+</html>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+    var price = getUrlParam('price');
+    var orderId = getUrlParam('orderId');
+    var agentId = getUrlParam('agentId');
+    var type = getUrlParam('type');
+    var oid = getUrlParam('oid');
+    if(type == 'zhuce'){
+        var fukuan = agentId
+    } else {
+        var fukuan = localStorage.uid
+    }
+    if(oid == undefined){
+        var order = orderId
+    } else {
+        var order = oid
+        var fukuan = agentId
+    }
+    console.log(type)
+    
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el:'#app',
+        data:{
+            price:0
+        },
+        methods: {
+            findData:function(){
+                var that = app;
+                if(type == 'zhuce'){
+                    document.getElementById('second').style.display = 'none'
+                }
+                if(oid == undefined){
+                    that.price = price;
+                } else {
+                    document.getElementById('second').style.display = 'none'
+                    $.ajax({
+                        url:serverHost + '/orderInfos/info/'+oid,
+                        type:'get',
+                        dataType:'json',
+                        success:function(data){
+                            that.price = data.data.totalPrice
+                        }
+                    })
+                }
+            },
+            submit:function(){
+                console.log(fukuan)
+                console.log("orderId:"+order+" openid:"+localStorage.openid)
+                
+                if(localStorage.i == undefined){
+                    localStorage.i = 0;
+                }
+                if(localStorage.i == 0){
+                    $.ajax({
+                        url:serverHost + '/pay/agentWxPay',
+                        type: 'post',
+                        dataType: 'json',
+                        data: {
+                            orderId: order,
+                            agentId: fukuan,
+                            openid:localStorage.openid
+                        },
+                        success: function (data) {
+                            console.log(data);
+                            if (typeof WeixinJSBridge == "undefined") {
+                                if (document.addEventListener) {
+                                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                                } else if (document.attachEvent) {
+                                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                                }
+                            } else {
+                                onBridgeReady(data);
+                            }
+                        }
+                    })
+                } else if(localStorage.i == 1){
+                    layer.open({
+                        type: 1
+                        ,title: "确认使用钱包扣款？" //不显示标题栏
+                        ,closeBtn: false
+                        ,area: ['40%','40%']
+                        ,shade: 0.8
+                        ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,btn: ['确认', '取消']
+                        ,btnAlign: 'c'
+                        ,moveType: 1 //拖拽模式，0或者1
+                        ,content:''
+                        ,success: function(layero){
+                            console.log(123)
+                        },
+                        yes: function(index, layero){
+                            $.ajax({
+                                url:serverHost + '/pay/balancePay',
+                                type:'post',
+                                dataType:'json',
+                                data:{
+                                    agentId:fukuan,
+                                    orderId:orderId
+                                },
+                                success:function(data){
+                                    layer.close(layer.index); 
+                                    if(data.code == 200){
+                                        layer.open({
+                                            content: '付款成功'
+                                            ,skin: 'msg'
+                                            ,time: 2 
+                                        });
+                                        setTimeout(function () {
+                                            window.location.href = 'mine.html'
+                                        }, 1000);
+                                    } else if(data.code == 41037){
+                                        layer.open({
+                                            content: '钱包余额不足'
+                                            ,skin: 'msg'
+                                            ,time: 2 
+                                        });
+                                    }
+                                }
+                            })
+                        },
+                    })
+                }
+            }
+        },
+    })
+    app.findData()
+
+    //调用微信支付
+    function onBridgeReady(data) {
+        var timestamp = (new Date()).getTime();
+        var package = "prepay_id=" + data.prepay_id;
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', {
+                "appId": data.data.appId, //公众号名称，由商户传入     
+                "timeStamp": data.data.timeStamp, //时间戳，自1970年以来的秒数     
+                "nonceStr": data.data.nonceStr, //随机串     
+                "package": data.data.package,
+                "signType": "MD5", //微信签名方式：     
+                "paySign": data.data.sign //微信签名 
+            },
+            function (res) {
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                    //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                    setTimeout(function () {
+                        localStorage.clear('i')
+                        if(type == 'zhuce'){
+                            window.location.href = 'mine.html'
+                        } else {
+                            window.location.href = 'mine.html'
+                        }
+                    }, 1000);
+                }
+            });
+    }
+
+    //选择付款方式
+    let filter = document.getElementsByClassName("cashierClassfication")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+            filter[i].classList.add('active')
+            localStorage.setItem('i',i)
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+</script>

@@ -1,0 +1,97 @@
+body{
+	background: #F2F2F2;
+	margin: 0;
+}
+
+.header{
+	width: 100%;
+	height: 1.4rem;
+	background: #fff;
+	display: flex;
+}
+
+.visitorItem{
+	width: 33.333%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.num{
+	font-size: 0.28rem;
+}
+
+.name{
+	font-size: 0.24rem;
+	color: #5C5C5C;
+	padding-top: 0.1rem;
+}
+
+.visitorItem:nth-child(2) .num{
+	font-size: 0.34rem;
+	margin-top: -0.05rem;
+}
+
+.visitorItem:nth-child(2) .name{
+	margin-top: -0.04rem;
+}
+
+.fangkeItem{
+	width: 100%;
+	height: 0.9rem;
+	background: #fff;
+	margin-top: 0.15rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.fangkeItem img{
+	width: 0.55rem;
+	height: 0.55rem;
+	border-radius: 50%;
+	margin-left: 0.2rem;
+}
+
+.fname_daili_time{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.1rem;
+}
+
+.fnam_daili{
+	display: flex;
+	align-items: center;
+}
+
+.fname{
+	font-size: 0.24rem;
+}
+
+.daili{
+	font-size: 0.18rem;
+	padding: 0.01rem 0.1rem;
+	background: #F1F1F1;
+	color: #646464;
+	margin-top: 0.04rem;
+	margin-left: 0.2rem;
+}
+
+.time{
+	font-size: 0.2rem;
+	color: #666666;
+	padding-top: 0.02rem;
+}
+
+.vipGrade{
+	font-size: 0.22rem;
+	color: #fff;
+	padding: 0.07rem 0.15rem;
+	background: #A3ABB8;
+	border-top-left-radius: 0.2rem;
+	border-bottom-right-radius: 0.2rem;
+	position: absolute;
+	right: 0.3rem;
+}

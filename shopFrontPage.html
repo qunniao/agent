@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script src="./js/adapt.js"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/method.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/shopFrontPage.css" />
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<title>柳占硕的店铺</title>
+		<style type="text/css">
+			.agentItem{
+				width: 25%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header">
+				<a href="javascript:;">
+					<img :src="cover"/>
+				</a>
+			</div>
+			<!--新品上市-->
+			<div class="newProduct">
+				<span class="title">新品上市</span>
+				<div class="newProductList">
+					<div class="newProductItem" v-for="(item,index) in newProduct" v-if="index<3">
+						<a href="javascript:;">
+							<img :src="item.cover"/>
+							<span class="name">{{item.productName}}</span>
+						</a>
+					</div>
+				</div>
+				<!--明星产品-->
+				<div class="starProduct">
+					<span class="title">明星产品</span>
+					<div class="starProductList">
+						<div class="starProductItem" v-for="item in startProduct">
+							<a href="javascript:;">
+								<div class="starProductItem_img">
+									<img :src="item.productCover" />
+								</div>
+								<div class="starProductItem_right">
+									<span class="advantage">{{item.productName}}</span>
+									<div class="money">
+										<span class="moneyTitle">上新价</span>
+										<span class="price">￥ {{item.price}}</span>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--所有产品-->
+				<div class="allProduct">
+					<span class="title">全部产品</span>
+					<div class="allProductList">
+						<div class="allProductItem" v-for="item in allProduct">
+							<a href="javascript:;">
+								<img :src="item.cover"/>
+								<span class="allProductItem_title">{{item.productName}}</span>
+								<div class="allProductItem_price">
+									<span class="allProductItem_price_title">￥</span>
+									<span class="allProductItem_money">{{item.price}}</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="qwe"></div>
+			</div>
+			<div class="footer">
+				<div class="agentItem">
+					<a href="javascript:;">
+						<img src="./imgs/home1.png"/>
+						<span>店铺</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="commodity.html">
+						<img src="./imgs/daili1.png"/>
+						<span>分类</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="retailShoppingCart.html">
+						<img src="./imgs/home.png"/>
+						<span>购物车</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="retailMine.html">
+						<img src="./imgs/wode1.png"/>
+						<span>我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<!--<script type="text/javascript">
+	// 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
+	var useragent = navigator.userAgent;
+	if(useragent.match(/WindowsWechat/) == 'WindowsWechat' || useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+		// 这里警告框会阻塞当前页面继续加载
+		//alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+		document.head.innerHTML = '<title>抱歉，出错了</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css">';
+		document.body.innerHTML = '<div class="weui_msg"><div class="weui_icon_area"><i class="weui_icon_info weui_icon_msg"></i></div><div class="weui_text_area"><h4 class="weui_msg_title">请在微信客户端打开链接</h4></div></div>';
+
+	}
+</script>-->
+<!--<script type="text/javascript">
+	window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+	console.log(12321)
+	//window.location.href = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf2677d625e6881f4&secret=28947839a5c50b2a849d0fff5e311f5e&code=CODE&grant_type=authorization_code'
+
+</script>-->
+<script type="text/javascript">
+	var serverHost = getServerHost()
+	
+	var app = new Vue({
+		el:'#app',
+		data:{
+			cover:'',
+			productId:'',
+    		productId:'',
+    		newProduct:[],
+    		startProduct:[],
+    		allProduct:[]
+		},
+		methods:{
+			findData:function(){
+				var that = app;
+				$.ajax({
+    				type:"get",
+    				url:serverHost + "/storeAds/info/1",
+    				success:function(data){
+    					that.cover = data.data[0].cover;
+    					that.productId = data.data[0].productId
+    				}
+    			});
+    			$.ajax({
+    				type:"get",
+    				url:serverHost + "/products/list",
+					data:{
+						productType:0
+					},
+    				success:function(data){
+    					that.newProduct = data.data
+    				}
+    			});
+    			$.ajax({
+    				type:"get",
+    				url:serverHost + "/storeAds/info/3",
+    				success:function(data){
+    					that.startProduct = data.data
+    				}
+    			});
+    			$.ajax({
+    				type:"get",
+    				url:serverHost + "/products/list",
+					data:{
+						productType:0
+					},
+    				success:function(data){
+    					that.allProduct = data.data
+    				}
+    			});
+			}
+		}
+	})
+	app.findData()
+</script>
+

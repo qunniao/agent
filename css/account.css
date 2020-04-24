@@ -1,0 +1,30 @@
+body{
+    margin: 0;
+    background: #f3f3f3;
+}
+
+.accountItem{
+    width: 100%;
+    height: 0.7rem;
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    position: relative;
+    margin-bottom: 0.15rem;
+}
+
+.name{
+    font-size: 0.22rem;
+    padding-left: 0.15rem;
+}
+
+.money{
+    font-size: 0.22rem;
+    padding-left: 0.15rem;
+}
+
+.time{
+    font-size: 0.22rem;
+    position: absolute;
+    right: 0.3rem;
+}

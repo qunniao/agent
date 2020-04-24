@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/myAddress.css"/>
+	    <script type="text/javascript" src="js/jquery.js"></script>
+	    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>我的收货地址</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="addressItem" v-for="item in addressa">
+				<div class="name_phone_address" @click="goComfi(item.id)">
+					<div class="name_phone">
+						<span class="name">{{item.contactName}}</span>
+						<span class="phone">{{item.contactPhone}}</span>
+					</div>
+					<span class="address">{{item.contactAddress}}</span>
+				</div>
+				<div class="moren_edit_delete">
+					<div class="left" v-if="item.isDefaultAddress===true">
+						<img src="imgs/gouxuan.png"/>
+						<span class="moren">默认地址</span>
+					</div>
+					<div class="right">
+						<div class="rightItem" @click="editAddress(item.id)">
+							<img src="imgs/edit.png"/>
+							<span class="editName">编辑</span>
+						</div>
+						<div class="rightItem" @click="deleteAddress(item.id)">
+							<img src="imgs/delete.png"/>
+							<span class="editName">删除</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="addNewAddress" @click="addAddress">
+				添加新地址
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var serverHost = getServerHost()
+	var app = new Vue({
+		el:'#app',
+		data:{
+			addressa:[]
+		},
+		methods:{
+			findData:function(){
+				var that = this;
+				//获取用户地址
+				$.ajax({
+					url:serverHost+'/userAddresss/list/'+localStorage.uid,
+					type:'get',
+					dataType:'json',
+					// data:{
+					// 	uid:137
+					// },
+					success:function(data){
+						that.addressa = data.data
+						console.log(1321)
+					}
+				})
+			},
+			//删除地址
+			deleteAddress:function(e){
+				var that = this;
+				layer.open({
+                    type: 1,
+                    title: "确认删除该地址吗？" //不显示标题栏
+                        ,
+                    closeBtn: false,
+                    area: ['40%', '40%'],
+                    shade: 0.8,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确认', '取消'],
+                    btnAlign: 'c',
+                    moveType: 1 //拖拽模式，0或者1
+                        ,
+                    content: '',
+                    success: function (layero) {
+                        console.log(123)
+                    },
+                    yes: function (index, layero) {
+						$.ajax({
+							url:serverHost + '/userAddresss/delete?ids='+e,
+							type:'delete',
+							dataType:'json',
+							// data:{
+							// 	ids:e
+							// },
+							success:function(data){
+								layer.close(layer.index);
+								if(data.code == 200){
+									layer.open({
+										content: '地址删除成功'
+										,skin: 'msg'
+										,time: 2 //2秒后自动关闭
+									});
+									setTimeout(function () {
+						                that.findData()
+						            }, 1000);
+								}
+							}
+						})
+					}
+				})
+			},
+			//编辑地址
+			editAddress:function(e){
+				window.location.href = 'addAddress.html?id='+e+'&type=edit'
+			},
+			goComfi:function(e){
+				window.location.href = 'confirmationOfOrder.html?id='+e
+			},
+			addAddress:function(){
+				window.location.href = 'addAddress.html?type=add'
+			}
+		}
+	})
+	app.findData()
+</script>

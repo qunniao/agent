@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+	<link rel="stylesheet" type="text/css" href="css/poster.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>推广商品海报</title>
+</head>
+<body>
+    <canvas id="aa" width="370px"height="500px" style="display: none;"></canvas>
+    <div class="box" style="background: #fff;width: 370px;height: 500px;margin: 0 auto;margin-top: 0.3rem;"></div>
+    <div class="baocun">
+    	<span class="changan">长按保存图片</span>
+    </div>
+    <script>
+        var aa = document.getElementById('aa');
+        var bb = aa.getContext('2d');
+        
+        var beijing = new Image;
+        beijing.src = 'imgs/iiiii.jpg';
+        
+        var imgone = new Image;
+        imgone.src = 'imgs/summer_beach.jpg';
+        
+        var touxiang = new Image;
+        touxiang.src = 'imgs/summer_beach.jpg';
+        
+        var QRcode = new Image;
+        QRcode.src = 'imgs/summer_beach.jpg';
+ 
+        imgone.onload = function () {
+        	
+        	bb.drawImage(beijing, 0,0,370,500);
+        	
+            bb.drawImage(imgone, 0,0,370,300);
+            
+            bb.font="18px normal";
+        	bb.fillStyle="red";
+            bb.fillText('258.00',15,330);
+            
+            bb.font="14px normal";
+        	bb.fillStyle="#eee";
+            bb.fillText('市场价280.00',80,330);
+            
+            bb.font="16px normal";
+        	bb.fillStyle="#000";
+            bb.fillText('青春焕颜山茶花亮采面膜紧致弹润',15,360);
+            
+            bb.drawImage(touxiang, 15,400,60,60);
+            
+            bb.font="16px normal";
+        	bb.fillStyle="#000";
+            bb.fillText('柳占硕的店铺',85,425);
+            
+            bb.font="14px normal";
+        	bb.fillStyle="#000";
+            bb.fillText('扫码进入我的店铺',85,445);
+            
+            bb.drawImage(QRcode, 270,380,80,80);
+            
+            var lineWidth = 0;
+            var canvasWidth = aa.width-50;//计算canvas的宽度
+            var initHeight=400;//绘制字体距离canvas顶部初始的高度
+            var lastSubStrIndex= 0; //每次开始截取的字符串的索引
+        
+        }
+
+        window.onload=function(){
+        var img = convertCanvasToImage(aa);
+        $('.box').append(img);
+        console.log(img);
+        }
+    
+        function convertCanvasToImage(canvas) {
+            var image = new Image();
+            image.src = canvas.toDataURL("image/png");
+            return image;
+        }
+    </script>
+</body>
+</html>

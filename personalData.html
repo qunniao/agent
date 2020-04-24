@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/personalData.css" />
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <title>个人中心</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="item">
+            <span class="title">手机号码</span>
+            <span class="phone" id="phone">15797639167</span>
+            <span class="right"></span>
+        </div>
+        <div class="item">
+            <a href="changePassword.html">
+                <span class="title">登录密码</span>
+                <span class="right"></span>
+            </a>
+        </div>
+        <div class="anquan">
+            <span class="anquanTitle">为保障您的资金安全，建议支付密码和登录密码设置不一样</span>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+
+        },
+        methods: {
+            findData: function () {
+                $(".phone").each(function () {
+                    var phonea = document.getElementById('phone').innerText.substr(0, 3) + '****' +
+                        document.getElementById('phone').innerText.substr(7)
+                    document.getElementById('phone').innerHTML = phonea
+                })
+            }
+        },
+    })
+    app.findData()
+</script>

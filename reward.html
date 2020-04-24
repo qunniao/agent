@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/reward.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/methods.js"></script>
+		<title>奖励</title>
+	</head>
+	<body>
+		<div class="rewardItem" id="app">
+			<div class="rewardItem_list" v-for="item in reward">
+				<div class="rewardItem_item">
+					<span class="rewardItem_item_titlea" v-if="item.rewardType==4">普通一次性奖励</span>
+					<span class="rewardItem_item_titlea" v-else-if="item.rewardType==1">普通订单奖励</span>
+				</div>
+				<div class="rewardItem_item">
+					<span class="rewardItem_item_titleb">金额: {{item.amount}}</span>
+				</div>
+				<div class="rewardItem_item">
+					<span class="rewardItem_item_titlec">{{item.gmtCreate}}</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script>
+	var serverHost = getServerHost()
+	var app = new  Vue({
+		el:'#app',
+		data:{
+			reward:[]
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				$.ajax({
+					url: serverHost+'/rewards/page',
+					type:'get',
+					dataType:'json',
+					data:{
+						current:1,
+						sizeL:20,
+						agentId:61
+					},
+					success:function(data){
+						that.reward = data.data.records
+					}
+				})
+			}
+		},
+	})
+	app.findData()
+</script>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+	<link rel="stylesheet" type="text/css" href="css/retailShoppingCart.css"/>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <title>购物车</title>
+</head>
+<body>
+        <div id="app">
+            <div class="header">
+            	<p class="shopLength">共{{shoppingList.length}}件宝贝</p>
+            	<span class="edit">编辑</span>
+            </div>
+            <div class="shoppingMain">
+                <div class="shoppingItem" v-for="(item,index) in shoppingList"><!--列表项-->
+                    <div class="selectCircle" :class="{checked:item.isSelect}" @click="selectGoods(item)"></div>
+                    <div class="shoppingImg">
+                        <img :src="item.imgurl" alt="">
+                    </div>
+                    <div class="itemRight">
+                        <p class="title">{{item.title}}</p>
+                        <div class="numAndMoney">
+                            <p class="price">￥{{item.money}}</p>
+                            <div class="numberControl">
+                                <div class="btn" @click="numDel(item,index)">-</div>
+                                <input type="text" v-model="item.num" readonly="readonly">
+                                <div class="btn" @click="numAdd(item,index)">+</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottomMain">                <!--底部固定栏-->
+                <div class="selectCircle" :class="{checked:allSelect}" @click="allGoodsSelect"></div>
+                <span class="selectAll" style="padding: 10px">全选</span>
+                <div class="heji">
+                	<span class="zonggong">合计：<b>￥{{sum}}</b></span>
+                	<span class="yunfei">不含运费</span>
+                </div>
+                <button class="bottombtn1" @click="buyGoods">结算（{{length}}）</button>                
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript">  
+            var vm = new Vue({                //实例化Vue
+                el:'#app',
+                data:{                        //数据
+                    shoppingList:[
+                        {
+                            imgurl:"imgs/lang_yie_ar_kung_fu.jpg",
+                            title:"女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包",
+                            color:"粉色",
+                            money:149,
+                            num:1,
+                            isSelect:false,
+                        },
+                        {
+                            imgurl:"imgs/lang_yie_ar_kung_fu.jpg",
+                            title:"女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包",
+                            color:"粉色",
+                            money:149,
+                            num:1,
+                            isSelect:false,
+                        },
+                        {
+                            imgurl:"imgs/lang_yie_ar_kung_fu.jpg",
+                            title:"女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包",
+                            color:"粉色",
+                            money:149,
+                            num:1,
+                            isSelect:false,
+                        },
+                        {
+                            imgurl:"imgs/lang_yie_ar_kung_fu.jpg",
+                            title:"女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包",
+                            color:"粉色",
+                            money:149,
+                            num:1,
+                            isSelect:false,
+                        },
+                        {
+                            imgurl:"imgs/lang_yie_ar_kung_fu.jpg",
+                            title:"女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包女包",
+                            color:"粉色",
+                            money:149,
+                            num:1,
+                            isSelect:false,
+                        },
+                    ],
+                    allSelect:false,
+                    sum:0,
+                    length:0
+                },
+                methods:{
+                    selectGoods(item){        //商品选择方法
+                        item.isSelect = !item.isSelect    //改变选择状态
+                        this.allSelect = false
+                        if(item.isSelect == true){
+                            this.sum = this.sum+(item.money*item.num)
+                            this.length = this.length+item.num
+                        }else{
+                            this.sum = this.sum-(item.money*item.num)
+                            this.length = this.length-item.num
+                        }                           //结算处商品总额计算
+                    },
+                    allGoodsSelect(){                    //全选商品方法
+                        this.allSelect = !this.allSelect    //改变选择状态
+                        if(this.allSelect == true){
+                            this.sum=0
+                            for(var i=0;i<this.shoppingList.length;i++){
+                                this.shoppingList[i].isSelect = true;
+                                this.sum = this.sum+(this.shoppingList[i].money*this.shoppingList[i].num)
+                                this.length = this.length+this.shoppingList[i].num
+                            }
+                        }else{
+                            for(var i=0;i<this.shoppingList.length;i++){
+                                this.sum = this.sum-(this.shoppingList[i].money*this.shoppingList[i].num)
+                                this.length = this.length-this.shoppingList[i].num
+                                this.shoppingList[i].isSelect = false;
+                            }
+                        }                                    //结算处商品总额计算
+                    },
+                    numAdd(item,index){                     //商品数量增加
+                        item.num++
+                        if(item.isSelect == true){
+                            this.sum = this.sum+item.money
+                        }                                    //已选择商品增加数量，需要增加总额
+                    },
+                    numDel(item,index){                        //商品数量减少
+                        item.num--
+                        if(item.isSelect == true){
+                            this.sum = this.sum-item.money
+                        }                                     //已选择商品减少数量，需要减少总额
+                        if(item.num == 0){
+                            this.shoppingList.splice(index,1)
+                        }                                    //数量减少为0，需要删除对应数据
+                    },
+                    buyGoods(){                              //购买方法，这里只弹出提示所购买商品总额
+                        window.location.href = 'confirmationOfOrder.html'
+                    },
+                    delGoods(){                              //删除商品方法
+                        this.sum = 0;                        //所选商品被删除，总额置0
+                        for(var i=0;i<this.shoppingList.length;i++){
+                            if(this.shoppingList[i].isSelect){
+                                this.shoppingList.splice(i,1)
+                                i--
+                            }
+                        }                                    //对所选商品进行删除操作
+                        if(this.allSelect){
+                            this.shoppingList.splice(0,this.shoppingList.length);
+                            this.allSelect = false
+                        }                                    //全选商品后进行全部删除
+                    }
+                }
+            })
+</script>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/subordinate.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>订单列表</title>
+	</head>
+	<body>
+		<div class="top">
+			<span class="video">查看操作视频，请点击<b>这里</b></span>
+			<img src="imgs/close.png" class="close"/>
+		</div>
+		<div class="classification">
+			<div class="classificationItem">
+				<span class="title">全部类型</span>
+				<img src="imgs/GoBottom.png"/>
+			</div>
+			<div class="search">
+				<input type="text" placeholder="搜索订单信息"/>
+				<img src="imgs/search.png"/>
+			</div>
+			<div class="right">
+				<img src="imgs/home.png"/>
+			</div>
+		</div>
+		<div class="fenlei">
+			<div class="fenleiList">
+				<span class="fenleiItem active">全部</span>
+			</div>
+			<div class="fenleiList">
+				<span class="fenleiItem">待付款</span>
+			</div>
+			<div class="fenleiList">
+				<span class="fenleiItem">待发货</span>
+			</div>
+			<div class="fenleiList">
+				<span class="fenleiItem">待收货</span>
+			</div>
+			<div class="fenleiList">
+				<span class="fenleiItem"><a href="handle.html">售后</a></span>
+			</div>
+		</div>
+		<div class="content">
+			
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let filter = document.getElementsByClassName("fenleiItem")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+			filter[i].classList.add('active')
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+</script>

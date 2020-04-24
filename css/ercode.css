@@ -1,0 +1,33 @@
+body{
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.erweima{
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.changan{
+    font-size: 1rem;
+}
+
+.x-qrcode{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name{
+    line-height: 2rem;
+    padding-bottom: 1rem;
+    font-size: 1rem;
+}

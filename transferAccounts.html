@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/transferAccounts.css" />
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+    <title>转账</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="header">
+            <div class="title">
+                <span>转账金额</span>
+            </div>
+            <div class="center">
+                <input type="text" id="amount" placeholder="请输入转账金额">
+                <span @click="all">全部</span>
+            </div>
+            <div class="bottom">
+                <span>可转账金额{{incomeBalance}}</span>
+            </div>
+        </div>
+        <div class="zhanghu">
+            <span class="tixianTitle">转账到</span>
+            <div class="classfication">
+                <span class="name">姓名</span>
+                <input type="text" id="name" placeholder="请输入姓名">
+            </div>
+            <div class="classfication">
+                <span class="name">手机号</span>
+                <input type="text" id="phone" placeholder="请输入手机号">
+            </div>
+        </div>
+        <div class="submit">
+            <button @click="submit">确认</button>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            incomeBalance: 0
+        },
+        methods: {
+            findData: function () {
+                var that = app;
+                $.ajax({
+                    url: serverHost + '/wallet/info/' + localStorage.uid,
+                    type: 'get',
+                    dataType: 'json',
+                    success: function (data) {
+                        that.incomeBalance = data.data.incomeBalance
+                    }
+                })
+            },
+            all: function () {
+                document.getElementById('amount').value = this.incomeBalance
+            },
+            submit: function () {
+                var amount = $("#amount").val();
+                var trueName = $("#name").val();
+                var phone = $("#phone").val();
+                if (amount == '') {
+                    layer.open({
+                        content: '请输入转账金额',
+                        skin: 'msg',
+                        time: 2
+                    })
+                    return false;
+                } else if (amount < 100) {
+                    layer.open({
+                        content: '转账金额不能少于100',
+                        skin: 'msg',
+                        time: 2
+                    })
+                    return false;
+                } else if (trueName == '') {
+                    layer.open({
+                        content: '请输入转账人姓名',
+                        skin: 'msg',
+                        time: 2
+                    })
+                    return false;
+                } else if (phone == '') {
+                    layer.open({
+                        content: '请输入转账人手机号',
+                        skin: 'msg',
+                        time: 2
+                    })
+                    return false;
+                } else if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                    layer.open({
+                        content: '手机号输入错误，请重新输入',
+                        skin: 'msg',
+                        time: 2
+                    })
+                    return false;
+                }
+                var transferDto = {
+                    "agentId": localStorage.uid,
+                    "amount": amount,
+                    "phone": phone,
+                    "trueName": trueName
+                }
+                layer.open({
+                    type: 1,
+                    title: "确认使用钱包扣款？" //不显示标题栏
+                        ,
+                    closeBtn: false,
+                    area: ['40%', '40%'],
+                    shade: 0.8,
+                    id: 'LAY_layuipro' //设定一个id，防止重复弹出
+                        ,
+                    btn: ['确认', '取消'],
+                    btnAlign: 'c',
+                    moveType: 1 //拖拽模式，0或者1
+                        ,
+                    content: '',
+                    success: function (layero) {
+                        console.log(123)
+                    },
+                    yes: function (index, layero) {
+                        $.ajax({
+                            url: serverHost + '/transfer/agent',
+                            type: 'put',
+                            dataType: 'json',
+                            data: JSON.stringify(transferDto),
+                            headers: {
+                                'Content-Type': "application/json;charset=UTF-8"
+                            },
+                            success: function (data) {
+                                if (data.code == 41037) {
+                                    layer.close(layer.index);
+                                    layer.open({
+                                        content: '钱包余额不足',
+                                        skin: 'msg',
+                                        time: 2
+                                    })
+                                } else if (data.code == 41028) {
+                                    layer.close(layer.index);
+                                    layer.open({
+                                        content: '代理不存在',
+                                        skin: 'msg',
+                                        time: 2
+                                    })
+                                } else if(data.code == 41043){
+                                    layer.close(layer.index);
+                                    layer.open({
+                                        content: '不能给自己转账',
+                                        skin: 'msg',
+                                        time: 2
+                                    })
+                                } else {
+                                    layer.close(layer.index);
+                                    layer.open({
+                                        content: '转账成功',
+                                        skin: 'msg',
+                                        time: 2
+                                    })
+                                    setTimeout(function () {
+                                        window.location.href = 'mine.html'
+                                    }, 1000);
+                                }
+                            }
+                        })
+                    },
+                })
+
+            }
+        },
+    })
+    app.findData()
+</script>

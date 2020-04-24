@@ -1,0 +1,84 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.accountItem{
+	width: 100%;
+	height: 0.9rem;
+	line-height: 0,9rem;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	position: relative;
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.zccountName{
+	font-size: 0.24rem;
+	color: #000;
+	padding-left: 0.2rem;
+}
+
+.accountItem input{
+	width: 40%;
+	position: absolute;
+	right: 0.2rem;
+	height: 80%;
+	border: 0;
+	font-size: 0.24rem;
+	text-align: right;
+}
+
+input{
+    outline-color: invert ;
+	outline-style: none ;
+	outline-width: 0px ;
+	border: none ;
+	border-style: none ;
+	text-shadow: none ;
+	-webkit-appearance: none ;
+	-webkit-user-select: text ;
+	outline-color: transparent ;
+	box-shadow: none;
+}
+
+.accountItem a{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+}
+
+.btn-2 {
+	display: block;
+	width: 100%;
+	height: 100%;
+	background: url(imgs/borderlands_tiny_tina.jpg) center no-repeat;
+	background-size: 30px;
+	position: absolute;
+	top: 0px;
+}
+
+.btn-2 input {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	right: 0px;
+	top: 0;
+	opacity: 0;
+}
+
+.headerTitle{
+	padding-left: 0.2rem;
+}
+
+.headerNama{
+	font-size: 0.24rem;	
+	color: #989898;
+	position: absolute;
+	right: 0.5rem;
+}
+
+.accountItem:last-child{
+	border: 0;
+}

@@ -1,0 +1,232 @@
+body{
+	margin: 0;
+	background: #F3F3F3;
+}
+
+#app{
+	padding-bottom: 2rem;
+}
+
+.header{
+	width: 100%;
+	height: 1rem;
+	display: flex;
+	align-items: center;
+	background: #fff;
+	position: relative;
+}
+
+.header a {
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	width: 100%;
+	height: 100%;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.header img{
+	width: 0.25rem;
+	height: 0.25rem;
+	margin-left: 0.15rem;
+}
+
+.chooseDizhi{
+	font-size: 0.22rem;
+	color: #161616;
+	padding-left: 0.15rem;
+}
+
+.right{
+	width: 0.12rem;
+	height: 0.12rem;
+	border-top: 0.03rem solid #7F7F7F;
+	border-right: 0.03rem solid #7F7F7F;
+	transform: rotate(45deg);
+	position: absolute;
+	right: 0.3rem;
+}
+
+.productList{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.2rem;
+}
+
+.top{
+	width: 100%;
+	height: 0.2rem;
+	background: #fff;
+}
+
+.productItem{
+	width: 100%;
+	height: 1.8rem;
+	background: #FAF8FB;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.productItem img{
+	width: 1.4rem;
+	height: 1.4rem;
+	margin-left: 0.15rem;
+	border: 1px solid #DFDFDF;
+}
+
+.name{
+	font-size: 0.24rem;
+	color: #333333;
+	position: absolute;
+	top: 0.15rem;
+	left: 1.8rem;
+}
+
+.price{
+	font-size: 0.24rem;
+	color: red;
+	position: absolute;
+	bottom: 0.2rem;
+	left: 1.8rem;
+}
+
+.num{
+	font-size: 0.22rem;
+	color: #333333;
+	position: absolute;
+	bottom: 0.2rem;
+	right: 0.3rem;
+}
+
+.peisong_yunfei_liuyan{
+	width: 100%;
+	background: #FFFFFF;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.peisong_yunfei_liuyan:last-child{
+	margin-top: 0.15rem;
+}
+
+.peisong{
+	width: 97%;
+	margin-left: 3%;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	border-bottom: 1px solid #F3F3F3;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.peisong_yunfei_liuyan .peisong:last-child{
+	border: 0;
+}
+
+.title{
+	font-size: 0.22rem;
+	color: #333333;
+}
+
+.content{
+	font-size: 0.22rem;
+	color: #959595;
+	position: absolute;
+	right: 0.15rem;
+}
+
+.peisong input{
+	width: 80%;
+	height: 80%;
+	font-size: 0.22rem;
+	color: #959595;
+	margin-left: 5%;
+	border: 0;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.bottom{
+	width: 100%;
+	height: 0.8rem;
+	background: #FFFFFF;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.bottom_right{
+	position: absolute;
+	right: 0;
+	display: flex;
+	align-items: center;
+}
+
+.heji{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	align-items: right;
+	justify-content: right;
+	text-align: right;
+	margin-right: 0.3rem;
+}
+
+.hejiTitle{
+	font-size: 0.22rem;
+	color: #333333;
+}
+
+.hejiTitle b{
+	font-weight: normal;
+	color: #E6324D;
+}
+
+.shuliang{
+	font-size: 0.2rem;
+	color: #636363;
+}
+
+.submit{
+	font-size: 0.24rem;
+	color: #FFFFFF;
+	width: 1.7rem;
+	height: 0.8rem;
+	background: #24C079;
+	border: 0;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.dizhi{
+	display: flex;
+	flex-direction: column;
+}
+
+.xingmign_dianua{
+	display: flex;
+}
+
+.xingmin{
+	font-size: 0.22rem;
+	color: #333;
+	padding-left: 0.2rem;
+}
+
+.dianhua{
+	font-size: 0.2rem;
+	color: #333;
+	padding-left: 0.1rem;
+}
+
+.wodedizhi{
+	font-size: 0.22rem;
+	color: #333;
+	padding-left: 0.2rem;
+}

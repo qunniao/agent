@@ -1,0 +1,87 @@
+body{
+	margin: 0;
+}
+
+.choose{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.chooseTitle{
+	font-size: 0.4rem;
+	text-align: center;
+	padding-top: 0.4rem;
+}
+
+.agentItema{
+	width: 80%;
+	margin-left: 10%;
+	height: 1.5rem;
+	border: 1px solid #CCCCCC;
+	border-radius: 0.1rem;
+	margin-top: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.dibu{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background: #27BC78;
+	position: fixed;
+	bottom: 0;
+}
+
+.dibu span{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 0.26rem;
+	color: #fff;
+}
+
+.active{
+	border: 1px solid #47A684;
+	background: rgba(73, 247, 99, 0.1);
+}
+
+.left{
+	width: 0.3rem;
+	height: 0.3rem;
+	border: 1px solid #CACACA;
+	border-radius: 50%;
+	margin-left: 0.3rem;
+}
+
+.active>.left{
+	background: url('../imgs/gouxuan.png') no-repeat;
+	background-size: 0.3rem;
+	border: 1px solid #27BC78;
+}
+
+.right{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.3rem;
+}
+
+.title{
+	font-size: 0.26rem;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.content{
+	font-size: 0.22rem;
+}
+
+.active>.right{
+	color: #27BC78;
+}
+
+.dibua{
+	width: 100%;
+	height: 1rem;
+}

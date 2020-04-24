@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/purchase.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>分类选购</title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="mask"></div>
+			<div id="login">
+				<div class="img_name_price">
+					<img :src="cover">
+					<div class="name_price">
+						<span class="titlea">{{name}}</span>
+						<span class="pricea">￥{{price}}</span>
+					</div>
+				</div>
+				<div class="goumaishuliang">
+					<span class="shuliangtitle">购买数量</span>
+					<div class="toubiande">
+						<div class="goods-quantity">
+							<button v-on:click="subtract(count,weight)">-</button>
+							<input type="text" value="0" v-model="count" disabled>
+							<button v-on:click="add(count,weight)">+</button>
+						</div>
+						<span class="kucuna">库存: 324234</span>
+					</div>
+				</div>
+				<div class="addCard">
+					<span class="jiaru" @click="addCard(name,price,id,weight)">加入购物车</span>
+				</div>
+			</div>
+			<div class="guding">
+				<div class="top">
+					<span class="jinhuo">向 公司 进货，购买后商品会邮寄给您</span>
+				</div>
+				<div class="search">
+					<input type="text" placeholder="搜索商品名称"/>
+					<img src="imgs/search.png"/>
+				</div>
+				<div class="classification">
+					<div class="classificationItem active">
+						默认
+					</div>
+					<div class="classificationItem">
+						销量
+					</div>
+					<div class="classificationItem">
+						价格
+					</div>
+					<div class="classificationItem">
+						全部
+					</div>
+				</div>
+			</div>
+			<div class="product">
+				<div class="productLeft">
+					<div class="productLeftItem" :class="{'acti':currentSort==-1}" :key="-1" @click="productClass(-1,-1,'全部')">
+						<span class="productLeftItemTitle">全部</span>
+					</div>
+					<div class="productLeftItem" :class="{'acti':currentSort==index}" :key="index" @click="productClass(index,item.tid,item.type_name)" v-for='(item,index) in productItem'>
+						<img :src="item.cover?item.cover:'imgs/children_game_concept02.jpg'"/>
+						<span class="productLeftItemTitle">{{item.type_name}}</span>
+					</div>
+				</div>
+				<div class="productRight">
+					<span class="title">| {{titleName}}</span>
+					<div class="productItem" v-for="item in shangpin">
+						<a v-bind:href="'details.html?pid='+item.pid">
+							<img :src="item.cover"/>
+							<div class="title_kucun_xiaoliang_price">
+								<span class="productName">{{item.productName}}</span>
+								<div class="kucun_xiaoliang">
+									<span class="kucun">库存：{{item.totalStock}}</span>
+									<span class="xiaoliang">销量：{{item.sales}}</span>
+								</div>
+								<div class="price_gouwuche">
+									<span class="price">￥{{item.stockPrice}}</span>
+								</div>
+							</div>
+						</a>
+						<img src="imgs/gouwuche.png" id="gouwuchede" @click="addCart(item.pid)"/>
+					</div>
+				</div>
+			</div>
+			<div class="bottom">
+				<!-- <div class="haicha">
+					<span class="haichaTitle">还差￥100.00</span>
+				</div> -->
+				<div class="submit">
+					<div class="gouwuche" @click="goCart">
+						<img src="imgs/shop.png"/>
+					</div>
+					<div class="heji">
+						<div class="hejiTop">
+							<span>合计：</span>
+							<span class="jine">￥{{totalPrice}}</span>
+						</div>
+						<span class="numyunfei">{{length}}种商品，不包含运费</span>
+					</div>
+					<div class="jiesuananniu" @click="submit">立即结算</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	
+	var serverHost = getServerHost()
+	
+	var app = new Vue({
+		el:'#app',
+		data:{
+			shangpin:[],
+			cover:'',
+			name:'',
+			price:'',
+			count: 0,
+			id:'',
+			productItem:[],
+			currentSort:-1,
+			length:0,
+			totalPrice:0,
+			titleName:'',
+			weight:0
+		},
+		methods:{
+			findData:function(){
+				var that = app;
+				console.log(21312)
+				that.titleName = '全部'
+				//查询商品
+				$.ajax({
+					type:"get",
+					url:serverHost + "/products/list",
+					data:{
+						productType:0
+					},
+					success:function(data){
+						that.shangpin = data.data;
+					}
+				});
+
+				//查询商品分类
+				$.ajax({
+					url: serverHost + '/productTypes/list',
+					type: 'get',
+					dataType: 'json',
+					data:{
+
+					},
+					success:function(data){
+						that.productItem = data.data
+					}
+				})
+
+				//查询购物车
+				$.ajax({
+					url:serverHost + '/agentCarts/queryList',
+					type:'get',
+					dataType:'json',
+					data:{
+						agentId:localStorage.uid
+					},
+					success:function(data){
+						that.length = data.data.length;
+						that.totalPrice = 0;
+						for(var i in data.data){
+							that.totalPrice += data.data[i].productNum*data.data[i].productPrice.toFixed(2)
+						}
+					}
+				})
+
+				var btn=document.getElementById("btn");
+				var mask=document.getElementById("mask");
+				var login=document.getElementById("login");
+				var close_login=document.getElementById("mask");
+				close_login.onclick=function(){
+					mask.style.display="none";
+					login.style.display="none";
+				};
+			},
+			//点击商品分类
+			productClass:function(index,tid,typeName){
+				var that = app;
+				this.currentSort  =  index;
+				
+				if(index == -1){
+					that.titleName = typeName
+					$.ajax({
+						url:serverHost + '/products/list',
+						type:'get',
+						dataType:'json',
+						data:{
+							productType:0
+						},
+						success:function(data){
+							that.shangpin = data.data;
+							that.titleName = typeName
+						}
+					})
+				} else {
+					$.ajax({
+						url:serverHost + '/products/list',
+						type:'get',
+						dataType:'json',
+						data:{
+							productType:0,
+							typeId:tid
+						},
+						success:function(data){
+							that.shangpin = data.data;
+							that.titleName = typeName
+						}
+					})
+				}
+			},
+			//点击加入购物车
+			addCard:function(e,price,id){
+				var orderCart = {"agentId":localStorage.uid,"productName":e,"productPrice":price,"pid":id,"productNum":this.count}
+				console.log(this.count)
+				if(this.count == 0){
+					layer.open({
+						content: '数量为0，不能加入购物车'
+						,skin: 'msg'
+						,time: 2 //2秒后自动关闭
+					});
+					return false;
+				}
+				$.ajax({
+					url:serverHost + '/agentCarts/insertOrUpdate',
+					type:'post',
+					dataType:'json',
+					headers:{
+						 'Content-Type': "application/json;charset=UTF-8"
+					},
+					data:JSON.stringify(orderCart),
+					success:function(data){
+						var btn=document.getElementById("btn");
+						var mask=document.getElementById("mask");
+						var login=document.getElementById("login");
+						var close_login=document.getElementById("mask");
+						if(data.code == 200){
+							layer.open({
+								content: '加入购物车成功'
+								,skin: 'msg'
+								,time: 2 //2秒后自动关闭
+							});
+							setTimeout(function () {
+                                app.findData()
+                            }, 100);
+							mask.style.display="none";
+							login.style.display="none";
+						} else if(data.code == 41011){
+							layer.open({
+								content: '数量不足或者数量大于库存，不能加入购物车'
+								,skin: 'msg'
+								,time: 2 //2秒后自动关闭
+							});
+						}
+					}
+				})
+			},
+			addCart:function(e){
+				var that = app;
+				document.getElementById("login").style.display = 'block'
+				document.getElementById("mask").style.display = 'inline-block'
+				$.ajax({
+					url:serverHost + '/products/info',
+					type:'get',
+					dataType:'json',
+					data:{
+						pid:e
+					},
+					success:function(data){
+						that.cover = data.data.cover;
+						that.name = data.data.product_name;
+						that.price = data.data.stock_price;
+						that.id = data.data.pid,
+						that.weight = data.data.weight,
+						that.count = 0
+					}
+				})
+			},
+			add: function(count,weight) {
+				this.count+=weight;
+			},
+			subtract: function(count,weight) {
+				if (this.count <= 0) {
+					this.count = 0;
+				} else {
+					this.count -= weight;
+				}
+				console.log(weight)
+			},
+			goCart:function(){
+				window.location.href = 'shoppingCart.html'
+			},
+			submit:function(){
+				//获取购物车数据
+				$.ajax({
+					url:serverHost + '/agentCarts/queryList',
+					type:'get',
+					dataType:'json',
+					data:{
+						agentId:localStorage.uid
+					},
+					success:function(data){
+						var list = [];
+						for(var i in data.data){
+							list.push(data.data[i].cid)
+						}
+						if(list.length == 0){
+							layer.open({
+								content: '购物车数量为0'
+								,skin: 'msg'
+								,time: 2 //2秒后自动关闭
+							});
+						} else {
+							window.location.href = 'confirmationOfOrder.html?cIds='+list
+						}
+					}
+				})
+			}
+		}
+	})
+	app.findData()
+	let filter = document.getElementsByClassName("classificationItem")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+			filter[i].classList.add('active')
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+			console.log(i)
+		})
+	}
+	
+	let filtera = document.getElementsByClassName("productLeftItem")
+	for(let i=0;i<filtera.length;i++){
+		filtera[i].addEventListener('click',function(){
+			filtera[i].classList.add('acti')
+			for(let j=0;j<filtera.length;j++){
+				if(i!=j){
+					filtera[j].classList.remove('acti')
+				}
+			}
+			console.log(i)
+		})
+	}
+</script>

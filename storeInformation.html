@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/storeInformation.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>店铺信息</title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="mask"></div>
+		    <div id="login">
+		        <input type="text" name="" id="" value="" />
+		        <div class="quxiao_quding">
+		        	<div class="asd" @click="close">
+		        		<span class="quxiao">取消</span>
+		        	</div>
+		        	<div class="asd" @click="close">
+		        		<span class="queding">确定</span>
+		        	</div>
+		        </div>
+		    </div>
+			<div class="header">
+				<div class="headerItem">
+					<a href="javascript:;" id="btn">
+						<span class="headerTitle">店铺名称</span>
+						<span class="headerName">柳占硕的店铺</span>
+						<span class="right"></span>
+					</a>
+				</div>
+				<div class="headerItem">
+					<span class="headerTitle">店铺头像</span>
+					<img src="imgs/borderlands_tiny_tina.jpg"/>
+					<span class="right"></span>
+				</div>
+				<div class="headerItem">
+					<a class="btn-2">
+						<span class="headerTitle">店招图</span>
+						<span class="headerName">请上传</span>
+						<span class="right"></span>
+						<input type="file" accept="image/*" id="upload" name="upload">
+					</a>
+				</div>
+			</div>
+			<div class="header">
+				<div class="headerItem">
+					<a href="shopFrontPage.html">
+						<span class="headerTitle">进入小店</span>
+						<span class="right"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+    window.onload=function(){
+        var btn=document.getElementById("btn");
+        var mask=document.getElementById("mask");
+        var login=document.getElementById("login");
+        btn.onclick=function(){
+            mask.style.display="block";
+            login.style.display="block";
+        };
+        var close_login=document.getElementById("mask");
+        close_login.onclick=function(){
+            mask.style.display="none";
+            login.style.display="none";
+        };
+    };
+    var app = new Vue({
+		el:'#app',
+		data:{
+			
+		},
+		methods:{
+			close(){
+				mask.style.display="none";
+            	login.style.display="none";
+			}
+		}
+	})
+</script>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/mine.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>个人中心</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<img :src="cover" class="portrait_img"/>
+				<div class="name_phone_mealType">
+					<div class="name_phone">
+						<span class="name">{{name}}</span>
+						<span class="phone">{{phone}}</span>
+					</div>
+				</div>
+				<div class="message_setUp">
+					<div class="message">
+						<a href="">
+							<img src="imgs/message.png"/>
+							<span class="messageName">消息</span>
+						</a>
+					</div>
+					<div class="message">
+						<a href="personalCenter.html">
+							<img src="imgs/shezhi2.png"/>
+							<span class="messageName">设置</span>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<!--我的订单-->
+				<div class="myOrder">
+					<div class="myOrderTop">
+						<a href="allOrder.html">
+							<span class="myOrderTop_title">我的订单</span>
+							<div class="quanbu">
+								<span class="allMyOrder">全部</span>
+							<span class="youjiantou"></span>
+							</div>
+						</a>
+					</div>
+					<div class="order_classification">
+						<div class="orderItem">
+							<a href="allOrder.html">
+								<img src="imgs/daifukuan.png"/>
+								<span class="orderItemName">待付款</span>
+							</a>
+						</div>
+						<div class="orderItem">
+							<a href="allOrder.html">
+								<img src="imgs/home.png"/>
+								<span class="orderItemName">待发货</span>
+							</a>
+						</div>
+						<div class="orderItem">
+							<a href="allOrder.html">
+								<img src="imgs/home.png"/>
+								<span class="orderItemName">待收货</span>
+							</a>
+						</div>
+						<div class="orderItem">
+							<a href="">
+								<img src="imgs/home.png"/>
+								<span class="orderItemName">售后</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--收入账户-->
+				<div class="account">
+					<div class="myOrderTop">
+						<span class="myOrderTop_title">收入账户</span>
+					</div>
+					<div class="balance">
+						<span class="balance_money">
+							余额<b>{{incomeBalance}}</b>
+						</span>
+						<a href="transferAccounts.html" class="cashWithdrawal">转账</a>
+					</div>
+					<div class="accountClassification">
+						<div class="accountItem">
+							<a href="settlement.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">待结算收入</span>
+							</a>
+						</div>
+						<div class="accountItem">
+							<a href="cashManagement.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">提现管理</span>
+							</a>
+						</div>
+						<div class="accountItem">
+							<a href="account.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">转账记录</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--货款账户-->
+				<div class="loanAccount">
+					<div class="myOrderTop">
+						<span class="myOrderTop_title">货款账户</span>
+					</div>
+					<div class="balance">
+						<span class="balance_money">
+							余额<b>0.00</b>
+						</span>
+					</div>
+					<div class="accountClassification">
+						<div class="accountItem">
+							<a href="rechargeApplication.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">充值申请</span>
+							</a>
+						</div>
+						<div class="accountItem">
+							<a href="">
+								<img src="imgs/home.png"/>
+								<span class="accountName">货款明细</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--我的应用-->
+				<div class="myApplication">
+					<div class="myOrderTop">
+						<span class="myOrderTop_title">我的应用</span>
+					</div>
+					<div class="application">
+						<div class="applicationItem">
+							<a href="receivingAccount.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">收款账户</span>
+							</a>
+						</div>
+						<div class="applicationItem">
+							<a href="shoppingMall.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">内购商城</span>
+							</a>
+						</div>
+						<div class="applicationItem">
+							<a href="curriculum.html">
+								<img src="imgs/home.png"/>
+								<span class="accountName">培训</span>
+							</a>
+						</div>
+						<div class="applicationItem">
+							<a href="javascript:;">
+								<img src="imgs/home.png"/>
+								<span class="accountName">活动</span>
+							</a>
+						</div>
+						<div class="applicationItem">
+							<a href="javascript:;">
+								<img src="imgs/home.png"/>
+								<span class="accountName">视频教程</span>
+							</a>
+						</div>
+						<div class="applicationItem">
+							<a href="javascript:;">
+								<img src="imgs/home.png"/>
+								<span class="accountName">更多</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="asd"></div>
+			</div>
+			<div class="footer">
+				<div class="agentItem">
+					<a href="homePage.html">
+						<img src="./imgs/home1.png"/>
+						<span>首页</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="agent.html">
+						<img src="./imgs/daili1.png"/>
+						<span>加盟店</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="retail.html">
+						<img src="./imgs/lingshou1.png"/>
+						<span>零售</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="javascript:;">
+						<img src="./imgs/wode2.png"/>
+						<span>我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+
+	var serverHost = getServerHost()
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			incomeBalance:0,
+			cover:'',
+			name:'',
+			phone:''
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				that.cover = JSON.parse(localStorage.rowVal).cover;
+				that.name = JSON.parse(localStorage.rowVal).name;
+				that.phone = JSON.parse(localStorage.rowVal).phone
+				$.ajax({
+					url:serverHost + '/wallet/info/'+localStorage.uid,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						that.incomeBalance = data.data.incomeBalance
+					}
+				})
+			}
+		},
+	})
+	app.findData()
+</script>

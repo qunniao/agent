@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/accountNumber.css"/>
+		<link rel="stylesheet" type="text/css" href="css/shoppingMall.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>内购</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="search">
+				<input type="text" placeholder="搜索商品名称"/>
+				<img src="imgs/search.png"/>
+			</div>
+			<div class="classification">
+				<div class="classificationItem">
+					<span class="classificationTitle active">默认</span>
+				</div>
+				<div class="classificationItem">
+					<span class="classificationTitle">销量</span>
+				</div>
+				<div class="classificationItem">
+					<span class="classificationTitle">价格</span>
+				</div>
+				<div class="classificationItem">
+					<img class="classificationTitle" :src="cover"/>
+				</div>
+			</div>
+			<div class="productList" :style="mypagestyle">
+				
+			</div>
+			<div class="productListTwo" :style="mypagestyleTwo">
+				
+			</div>
+			<div class="chaochu"></div>
+			<div class="dibu">
+				<img src="imgs/borderlands_tiny_tina.jpg"/>
+				<div class="heji">
+					<span class="hejiTitle"><b>合计：</b>￥0.00</span>
+					<span class="yunfei">0种商品，不包含运费</span>
+				</div>
+				<a href="">立即结算</a>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			cover:'imgs/pailie.png',
+			mypagestyle:{display:'block'},
+			mypagestyleTwo:{display:'none'}
+		},
+		methods:{
+			findData:function(){
+				var that = app;
+				let filter = document.getElementsByClassName("classificationTitle")
+				for(let i=0;i<filter.length;i++){
+					filter[i].addEventListener('click',function(){
+						filter[i].classList.add('active')
+						if(i == 3&&app.cover == 'imgs/pailie.png'){
+							app.mypagestyle = {display:'none'}
+							app.mypagestyleTwo = {display:'inline-block'}
+							app.cover = 'imgs/pailie3.png'
+						}else if(i == 3&&app.cover == 'imgs/pailie3.png'){
+							app.mypagestyle = {display:'block'}
+							app.mypagestyleTwo = {display:'none'}
+							app.cover = 'imgs/pailie2.png'
+						} else if(i == 3&&app.cover == 'imgs/pailie2.png'){
+							app.mypagestyle = {display:'none'}
+							app.mypagestyleTwo = {display:'inline-block'}
+							app.cover = 'imgs/pailie3.png'
+						} else if(i != 3&&app.cover == 'imgs/pailie3.png'){
+							app.cover = 'imgs/pailie4.png'
+						} else if(i != 3&&app.cover == 'imgs/pailie2.png'){
+							app.cover = 'imgs/pailie.png'
+						} else if(i == 3&&app.cover == 'imgs/pailie4.png'){
+							app.mypagestyle = {display:'block'}
+							app.mypagestyleTwo = {display:'none'}
+							app.cover = 'imgs/pailie2.png'
+						}
+						for(let j=0;j<filter.length;j++){
+							if(i!=j){
+								filter[j].classList.remove('active')
+							}
+						}
+					})
+				}
+			}
+		}
+	})
+	app.findData()
+</script>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script src="./js/adapt.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/agent.css" />
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<script src="./js/vue.js"></script>
+		<script src="./js/jquery.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>代理管理页</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header">
+				<img :src="cover" class="portrait_img"/>
+				<div class="name_phone_mealType">
+					<div class="name_phone">
+						<span class="name">{{name}}</span>
+						<span class="phone">{{phone}}</span>
+					</div>
+					<div class="mealType">
+						<img src="imgs/huangguan.png"/>
+						<span class="type">加盟商</span>
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<!--业绩-->
+				<div class="achievement">
+					<div class="achievementItem">
+						<div class="money_title">
+							<span class="money">0.00</span>
+							<span class="title">个人订单业绩</span>
+						</div>
+						<img src="imgs/yeji.png"/>
+					</div>
+					<div class="achievementItem">
+						<div class="money_title">
+							<span class="money">0.00</span>
+							<span class="title">邀请团队订单业绩</span>
+						</div>
+						<img src="imgs/yeji.png"/>
+					</div>
+				</div>
+				<!--团队管理-->
+				<div class="team">
+					<div class="left">
+						<img src="imgs/tuanduiguanli.png"/>
+						<span>团队管理</span>
+					</div>
+					<div class="right">
+						<div class="teamItem">
+							<a href="invitation.html">
+								<img src="imgs/yaoqingdaili.png"/>
+								<span>邀请代理</span>
+							</a>
+						</div>
+						<div class="teamItem">
+							<a href="">
+								<img src="imgs/shengjichuli.png"/>
+								<span>升级加盟店</span>
+							</a>
+						</div>
+						<div class="teamItem">
+							<a href="myTeam.html">
+								<img src="imgs/wodetuandui.png"/>
+								<span>我的团队</span>
+							</a>
+						</div>
+						<div class="teamItem">
+							<a href="examine.html">
+								<img src="imgs/jiarushenhe.png"/>
+								<span>加入审核</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--订单库存-->
+				<div class="order">
+					<span class="kucun">订单库存</span>
+					<div class="orderList">
+						<div class="orderItem">
+							<a href="purchase.html" id="jinhuo">
+								<img src="imgs/woyaojinhuo.png"/>
+								<span class="orderItemTitle">我要进货</span>
+							</a>
+						</div>
+						<div class="orderItem">
+							<a href="subordinate.html">
+								<img src="imgs/xiajidingdan.png"/>
+								<span class="orderItemTitle">下级订单</span>
+							</a>
+						</div>
+						<div class="orderItem">
+							<a href="stock.html">
+								<img src="imgs/wodekucun.png"/>
+								<span class="orderItemTitle">我的库存</span>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--数据推广-->
+				<div class="extension">
+					<span class="kucun">数据推广</span>
+					<div class="extensionList">
+						<div class="extensionItem">
+							<a href="reward.html">
+								<div class="extensionTitle_content">
+									<span class="extensionItem_title">代理奖励</span>
+									<span class="extensionItem_content">实时了解奖励明细</span>
+								</div>
+								<img src="imgs/dailijiangli.png" class="extensionItemImg"/>
+							</a>
+						</div>
+						<div class="extensionItem">
+							<a href="javascript:;">
+								<div class="extensionTitle_content">
+									<span class="extensionItem_title">我的业绩</span>
+									<span class="extensionItem_content">业绩在手奖励我有</span>
+								</div>
+								<img src="imgs/wodeyeji.png" class="extensionItemImg"/>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div id="asd">
+					
+				</div>
+			</div>
+			<div class="footer">
+				<div class="agentItem">
+					<a href="homePage.html">
+						<img src="./imgs/home1.png"/>
+						<span>首页</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="javascript:;">
+						<img src="./imgs/daili2.png"/>
+						<span>加盟店</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="retail.html">
+						<img src="./imgs/lingshou1.png"/>
+						<span>零售</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="mine.html">
+						<img src="./imgs/wode1.png"/>
+						<span>我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<!--<script type="text/javascript">
+	// 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
+	var useragent = navigator.userAgent;
+	if(useragent.match(/WindowsWechat/) == 'WindowsWechat' || useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+		// 这里警告框会阻塞当前页面继续加载
+		//alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+		document.head.innerHTML = '<title>抱歉，出错了</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css">';
+		document.body.innerHTML = '<div class="weui_msg"><div class="weui_icon_area"><i class="weui_icon_info weui_icon_msg"></i></div><div class="weui_text_area"><h4 class="weui_msg_title">请在微信客户端打开链接</h4></div></div>';
+
+	}
+</script>-->
+<script>
+	var app = new Vue({
+		el:'#app',
+		data:{
+			cover:'',
+			name:'',
+			phone:''
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				that.cover = JSON.parse(localStorage.rowVal).cover;
+				that.name = JSON.parse(localStorage.rowVal).name;
+				that.phone = JSON.parse(localStorage.rowVal).phone;
+				if(localStorage.levelId != 9){
+					document.getElementById('jinhuo').onclick = function(){
+						layer.open({
+							content: '您不是加盟商,无法进货'
+							,skin: 'msg'
+							,time: 2 //2秒后自动关闭
+						});
+						return false;
+					}
+				}
+			}
+		},
+	})
+	app.findData()
+</script>

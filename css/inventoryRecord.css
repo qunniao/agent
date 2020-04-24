@@ -1,0 +1,146 @@
+body{
+	background: #F3F3F3;
+	margin: 0;
+}
+
+.header{
+	width: 100%;
+	height: 0.8rem;
+	display: flex;
+	align-items: center;
+}
+
+.search{
+	width: 80%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.search input{
+	width: 90%;
+	height: 0.5rem;
+	border: 0;
+	border-radius: 0.3rem;
+	margin-left: 0.15rem;
+	padding-left: 0.5rem;
+	font-size: 0.22rem;
+	padding-right: 0.2rem;
+}
+
+.search img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	left: 0.3rem;
+}
+
+.shaixuan{
+	width: 20%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.shaixuanTitle{
+	font-size: 0.22rem;
+	color: #666;
+}
+
+.shaixuan img{
+	width: 0.2rem;
+	height: 0.2rem;
+	margin-top: 0.02rem;
+	margin-left: 0.05rem;
+}
+
+#login{
+    display:none;
+    background:white;
+    width:100%;
+    position:absolute;
+    z-index: 100;
+}
+
+#mask{
+    display:none;
+    background:rgba(0,0,0,0.5);
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index: 10;
+}
+
+.quxiao_quding{
+	width: 100%;
+	height: 0.8rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-top: 1px solid #F3F3F3;
+}
+
+.asd{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.asd:last-child{
+	background: #24BE78;
+}
+
+.quxiao{
+	font-size: 0.24rem;
+}
+
+.queding{
+	font-size: 0.24rem;
+	color: #fff;
+}
+
+.classification{
+	width: 100%;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+}
+
+.classificationTitle{
+	font-size: 0.22rem;
+	color: #5C5C5C;
+	padding-top: 0.15rem;
+	padding-left: 0.15rem;
+}
+
+.classificationList{
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 0.3rem;
+}
+
+.classificationItem{
+	width: 31%;
+	height: 0.7rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 0.22rem;
+	float: left;
+	background: #FAFAFA;
+	margin-left: 1.5%;
+	margin-top: 0.15rem;
+}
+
+.classificationItem:nth-child(3n+3){
+	margin-left: 2%;
+}
+
+.classificationName{
+	font-size: 0.22rem;
+	color: #333;
+}

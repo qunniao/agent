@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+<script type="text/javascript">
+//获取url中的参数
+function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId  decodeURI(escape(nick))
+    var id = getUrlParam('id');
+	
+	localStorage.setItem("zhuceId",id)
+	//window.location.href = 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com/index.html&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect'
+	//window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com/judge.html&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
+	window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com/agentRegistration.html&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
+</script>

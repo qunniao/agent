@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/orderDetails.css" />
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./js/methods.js"></script>
+    <title>订单详情</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="productItem" v-for="item in producta">
+            <img :src="item.cover" alt="" class="productImg">
+            <div class="right">
+                <span class="productName">{{item.productName}}</span>
+                <div class="price_num">
+                    <span class="price">￥{{item.productPrice}}</span>
+                    <span class="num">x{{item.productNum}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+    var oid = getUrlParam('oid');
+
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            producta:[]
+        },
+        methods: {
+            findData:function(){
+                var that = app;
+                $.ajax({
+                    url:serverHost + '/orderInfos/info/'+oid,
+                    type:'get',
+                    dataType:'json',
+                    success:function(data){
+                        that.producta = data.data.orderProductList
+                    }
+                })
+            }
+        },
+    })
+    app.findData()
+</script>

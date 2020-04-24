@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<link rel="stylesheet" type="text/css" href="css/personalCenter.css" />
+	<script src="./js/adapt.js"></script>
+	<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<title>个人中心</title>
+</head>
+
+<body>
+	<div id="app">
+		<div class="header">
+			<div class="personItem">
+				<a href="javascript:;">
+					<span class="title">个人资料</span>
+					<span class="right"></span>
+				</a>
+			</div>
+			<div class="personItem">
+				<a href="personalData.html">
+					<span class="title">账户与安全</span>
+					<span class="right"></span>
+				</a>
+			</div>
+		</div>
+		<div class="header">
+			<div class="personItem">
+				<a href="javascript:;">
+					<span class="title">发货物流设置</span>
+					<span class="right"></span>
+				</a>
+			</div>
+			<div class="personItem">
+				<a href="myAddress.html">
+					<span class="title">收货地址</span>
+					<span class="right"></span>
+				</a>
+			</div>
+			<div class="personItem">
+				<a href="javascript:;">
+					<span class="title">清理缓存</span>
+					<span class="right"></span>
+				</a>
+			</div>
+			<div class="personItem">
+				<a href="javascript:;">
+					<span class="title">服务协议</span>
+					<span class="right"></span>
+				</a>
+			</div>
+		</div>
+		<div class="bottom">
+			<button @click="submit">退出登录</button>
+		</div>
+	</div>
+</body>
+
+</html>
+<script>
+	var app = new Vue({
+		el: '#app',
+		data: {
+
+		},
+		methods: {
+			submit: function () {
+				localStorage.setItem("uid",null)
+				localStorage.setItem('levelId',null)
+				localStorage.setItem('trueName',null)
+				localStorage.setItem('phone',null)
+				localStorage.setItem('levelName',null)
+				localStorage.setItem('reviewed',null)
+				window.location.href = 'passwordLogin.html';
+				localStorage.setItem('tuichu',1)
+			}
+		},
+	})
+</script>

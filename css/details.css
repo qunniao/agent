@@ -1,0 +1,287 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.header{
+	width: 100%;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	background: #fff;
+}
+
+.lunbotu{
+	width: 100%;
+	height: 6rem;
+}
+
+.lunboshuzi{
+	width: 100%;
+	height: 0.7rem;
+	margin-top: -0.7rem;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.lunboshuzi span{
+	font-size: 0.24rem;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.index-content{
+	width: 100%;
+	height: 100%;
+}
+
+.banner{
+	width: 100%;
+	height: 100%;
+}
+
+.banner img{
+	width: 100%;
+	height: 100%;
+}
+
+.lunbotu img{
+	width: 100%;
+	height: 100%;
+}
+
+.price{
+	font-size: 0.22rem;
+	color: red;
+	padding-top: 0.15rem;
+	padding-left: 0.15rem;
+}
+
+.price b{
+	font-size: 0.3rem;
+	font-weight: normal;
+}
+
+.title{
+	font-size: 0.24rem;
+	padding-left: 0.15rem;
+	padding-top: 0.1rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+
+.freight_sales_tock{
+	display: flex;
+}
+
+.reight{
+	font-size: 0.18rem;
+	width: 33.3%;
+	padding-top: 0.15rem;
+	padding-bottom: 0.1rem;
+	color: #959595;
+}
+
+.reight:first-child{
+	text-align: left;
+	padding-left: 0.15rem;
+}
+
+.reight:nth-child(2){
+	text-align: center;
+}
+
+.reight:last-child{
+	text-align: right;
+	padding-right: 0.15rem;
+}
+
+.bottom{
+	width: 100%;
+	height: 0.8rem;
+	display: flex;
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+}
+
+.home{
+	width: 1rem;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.home a{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+}
+
+.home a img{
+	width: 0.3rem;
+	height: 0.3rem;
+}
+
+.homeTitle{
+	font-size: 0.18rem;
+	color: #333333;
+}
+
+.addCar{
+	width: 65%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background: #27BC78;
+	position: absolute;
+	right: 0;
+}
+
+.addCar a{
+	font-size: 0.26rem;
+	text-decoration: none;
+	display: flex;
+	justify-content: center;
+	color: #fff;
+}
+
+.sendTo{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	background: #fff;
+	margin-top: 0.1rem;
+	display: flex;
+	position: relative;
+}
+
+.sendTo a{
+	display: flex;
+	justify-content: center;
+	text-decoration: none;
+}
+
+.sendToTitle{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+	color: #5E5E5E;
+}
+
+.sendToRight{
+	height: 0.8rem;
+	position: absolute;
+	right: 0.3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.sendToRight img{
+	width: 0.3rem;
+	height: 0.3rem;
+}
+
+.chengshi{
+	font-size: 0.22rem;
+	color: #000;
+	padding-left: 0.1rem;
+}
+
+.youjiantou{
+	width: 0.13rem;
+	height: 0.13rem;
+	border-top: 0.02rem solid #666;
+	border-right: 0.02rem solid #666;
+	transform: rotate(45deg);
+}
+
+.person{
+	width: 100%;
+	height: 0.9rem;
+	background: #fff;
+	margin-top: 0.1rem;
+	display: flex;
+	position: relative;
+}
+
+.touxiang_ming{
+	padding-left: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.touxiang_ming img{
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+}
+
+.ming{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+}
+
+.personRight{
+	display: flex;
+	position: absolute;
+	right: 0;
+	border-left: 1px solid #eee;
+}
+
+.personRightItem{
+	width: 1.3rem;
+	height: 0.9rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.personRightItem a{
+	display: flex;
+	flex-direction: column;
+	color: #333;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+}
+
+.num{
+	font-size: 0.2rem;
+}
+
+.personRightItem_title{
+	font-size: 0.22rem;
+}
+
+.pictureDetails{
+	width: 100%;
+	background: #fff;
+	margin-top: 0.1rem;
+}
+
+.shangpina{
+	font-size: 0.24rem;
+	line-height: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.asd{
+	width: 100%;
+	height: 1rem;
+}
+
+.content{
+	width: 96%;
+	margin-left:2%;
+	padding-bottom: 0.3rem;
+}
+

@@ -1,0 +1,122 @@
+body {
+    margin: 0;
+    background: #f3f3f3;
+    position: relative;
+}
+
+.header {
+    width: 100%;
+    background: #fff;
+    margin-top: 0.1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.header .title {
+    width: 100%;
+    height: 0.7rem;
+    line-height: 0.7rem;
+    display: flex;
+    align-items: center;
+}
+
+.header .title span {
+    font-size: 0.22rem;
+    color: #333333;
+    padding-left: 0.15rem;
+}
+
+.header .center {
+    width: 100%;
+    height: 0.8rem;
+    display: flex;
+    align-items: center;
+}
+
+.header .center input {
+    width: 80%;
+    height: 100%;
+    border: 0;
+    font-size: 0.22rem;
+    padding-left: 0.3rem;
+}
+
+.header .center span {
+    font-size: 0.22rem;
+    color: #4F88CD;
+    text-align: center;
+}
+
+.header .bottom {
+    width: 100%;
+    height: 0.5rem;
+    line-height: 0.5rem;
+}
+
+.header .bottom span {
+    font-size: 0.18rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding-left: 0.2rem;
+}
+
+.zhanghu {
+    width: 100%;
+    margin-top: 0.15rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.tixianTitle {
+    font-size: 0.2rem;
+    color: #333333;
+    padding-left: 0.15rem;
+    line-height: 0.6rem;
+}
+
+.classfication {
+    width: 97%;
+    margin-left: 3%;
+    height: 0.7rem;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.name {
+    font-size: 0.2rem;
+    color: #333333;
+}
+
+.classfication input {
+    width: 85%;
+    height: 90%;
+    position: absolute;
+    right: 0;
+    border: 0;
+}
+
+.submit {
+    width: 100%;
+    height: 0.7rem;
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.submit button {
+    width: 80%;
+    height: 100%;
+    border-radius: 0.35rem;
+    background: #23BD77;
+    border: 0;
+    font-size: 0.26rem;
+    color: #fff;
+}
+
+.layui-m-layer1 .layui-m-layerchild {
+    width: 60%;
+}

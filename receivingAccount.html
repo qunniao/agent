@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/receivingAccount.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/rembasic.js" type="text/javascript" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="css/MultiPicker.css"/>
+		<link href="css/pandastar.css" rel="stylesheet">
+		<script src="js/MultiPicker.js" type="text/javascript" charset="utf-8"></script>
+		<title>收款账号</title>
+	</head>
+	<body>
+		<div class="header">
+			<span class="chakan">查看操作视频，请点击<b>这里</b></span>
+			<img src="imgs/close.png"/>
+		</div>
+		<div class="zhanghao">
+			<div class="zhanghaoLeft">
+				<span class="addzhanghao"><b>+</b>&nbsp;&nbsp;&nbsp;添加收款账号</span>
+			</div>
+			<span class="right"></span>
+			<input class="age-input" type="text" name="" id="age-input" value="" disabled=""/>
+		</div>
+		<div id="age-targetContainer"></div>
+	</body>
+</html>
+<script type="text/javascript">
+	//选择年龄
+	new MultiPicker({
+        input: 'age-input',//点击触发插件的input框的id
+        container: 'age-targetContainer',//插件插入的容器id
+        jsonData: [{
+          value: '微信',
+        }, {
+          value: '支付宝',
+        }, {
+          value: '银行卡',
+        }],
+        success: function (arr) {
+            $('.age-input').attr('value',JSON.stringify(arr[0].value).replace(/\"/g,""));
+        }//回调
+    });
+</script>

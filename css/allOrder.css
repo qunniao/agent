@@ -1,0 +1,236 @@
+body{
+	margin: 0;
+	background: #F3F3F3;
+}
+
+.header{
+	width: 100%;
+	height: 0.9rem;
+	display: flex;
+	align-items: center;
+}
+
+.leixing{
+	width: 25%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.leixingTitle{
+	font-size: 0.22rem;
+}
+
+.leixing img{
+	width: 0.15rem;
+	height: 0.1rem;
+	margin-left: 0.1rem;
+}
+
+.search{
+	width: 75%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.search input{
+	width: 80%;
+	height: 0.4rem;
+	border-radius: 0.4rem;
+	border: 0;
+	font-size: 0.22rem;
+	padding-left: 0.5rem;
+	padding-bottom: 0.15rem;
+}
+
+.search img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	left: 0.15rem;
+}
+
+.classificationList{
+	width: 100%;
+	height: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #fff;
+}
+
+.classificationItem{
+	width: 25%;
+	font-size: 0.22rem;
+	color: #565656;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.classificationItem span{
+	line-height: 0.7rem;
+}
+
+.active{
+	color: #000000;
+	line-height: 0.6rem;
+	border-bottom: 2px solid #000000;
+}
+
+.orderItem{
+	width: 94%;
+	margin-left: 3%;
+	background: #fff;
+	border-radius: 0.1rem;
+}
+
+.oderItemTop{
+	display: flex;
+	width: 100%;
+	height: 0.7rem;
+	align-items: center;
+	position: relative;
+	border-top-left-radius: 0.1rem;
+	border-top-right-radius: 0.1rem;
+	margin-top: 0.15rem;
+	border-bottom: 1px solid #F2F2F2;
+}
+
+.cai{
+	padding: 0 0.05rem;
+	font-size: 0.22rem;
+	color: #E1455A;
+	border: 1.5px solid #E1455A;
+	border-radius: 0.05rem;
+	margin-left: 0.15rem;
+}
+
+.number{
+	font-size: 0.24rem;
+	padding-left: 0.1rem;
+}
+
+.leixinga{
+	font-size: 0.22rem;
+	color: #E1455A;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.orderDetails{
+	width: 94%;
+	margin-left: 3%;
+}
+
+.labelList{
+	width: 100%;
+	display: flex;
+}
+
+.lableItem{
+	background: #EEF1FF;
+	color: #537DC7;
+	font-size: 0.18rem;
+	margin: 0.15rem 0;
+	margin-right: 0.15rem;
+	padding: 0 0.05rem;
+}
+
+.orderImgList{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin-top: 0.15rem;
+}
+
+.imgList{
+	display: flex;
+}
+
+.imgList img{
+	width: 1.2rem;
+	height: 1.2rem;
+	margin-right: 0.1rem;
+}
+
+.totalNum{
+	position: absolute;
+	right: 0;
+	display: flex;
+	align-items: center;
+}
+
+.total{
+	font-size: 0.22rem;
+	color: #898989;
+}
+
+.right{
+	width: 0.13rem;
+	height: 0.13rem;
+	border-top: 1.5px solid #898989;
+	border-right: 1.5px solid #898989;
+	transform: rotate(45deg);
+}
+
+.totalPrice{
+	width: 100%;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	position: relative;
+}
+
+.totalPirceName{
+	font-size: 0.24rem;
+	color: #333333;
+	position: absolute;
+	right: 0.2rem;
+}
+
+.voucher{
+	width: 94%;
+	margin-left: 3%;
+	height: 1rem;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.voucher a{
+	display: flex;
+	align-items: center;
+}
+
+.viewVoucher{
+	font-size: 0.22rem;
+	color: #fff;
+	background: #24BE78;
+	height: 0.5rem;
+	padding: 0 0.25rem;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	right: 0;
+	border-radius: 0.25rem;
+}
+
+.zhifu{
+	font-size: 0.2rem;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	margin-bottom: 0.3rem;
+	margin-right: 0.3rem;
+	text-align: right;
+}
+
+.zhifu span{
+	padding: 0.05rem 0.3rem;
+	color: #fff;
+	border-radius: 0.3rem;
+	background: #23BD77;
+}

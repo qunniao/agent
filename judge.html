@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/methods.js"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+</html>
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+    var code = getUrlParam('code');
+    var serverHost = getServerHost()
+    var app = new Vue({
+        el:'#app',
+        data:{
+
+        },
+        methods: {
+            findData:function(){
+                //登录
+				$.ajax({
+					url:serverHost + '/login/wxLogin',
+					type:'post',
+					dataType:'json',
+					data:{
+						code:code
+					},
+					success:function(data){
+						if(data.code == 42000){
+                            layer.open({
+                                content: '您还没有注册，请先注册'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            })
+                            setTimeout(function () {
+                                window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com/agentRegistration.html&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
+                            }, 1000);
+						} else if(data.data.agent.levelId == 9&&data.data.agent.reviewed == 0&&data.data.agentRegisterReview.orderId == null){
+                            layer.open({
+                                content: '您还没有选择套餐'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            })
+                            setTimeout(function () {
+                                var trueName = data.data.agent.trueName;
+                                var phone = data.data.agent.phone;
+                                var region = data.data.agent.region;
+                                var levelId =data.data.agent.levelId;
+                                var id = data.data.agent.id;
+                                window.location.href = 'choicePackage.html?levelId='+levelId+'&contactName='+trueName+'&contactPhone='+phone+'&contactAddress='+region+'&agentId='+id;
+                            }, 1000);
+                        } else if(data.data.agent.levelId == 9&&data.data.agent.reviewed == 0&&data.data.agentRegisterReview.orderId != null){
+                            layer.open({
+                                content: '您选择套餐后没有付款，请先付款'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            })
+                            setTimeout(function () {
+                                var id = data.data.agent.id;
+                                window.location.href = 'cashier.html?oid='+data.data.agentRegisterReview.orderId+'&agentId='+id
+                            }, 1000);
+                        } else if(data.data.agent.reviewed == 1){
+                           // window.location.href = 'index.html'
+                           window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf2677d625e6881f4&redirect_uri=http://ws.zhanchengwlkj.com/homePage.html&response_type=code&scope=snsapi_userinfo&state=123#wechat_redirect'
+
+                        }
+                        if(data.data.agent.levelId == 8){
+                            window.location.href = 'index.html'
+                        }
+					}
+				})
+            }
+        },
+    })
+    app.findData()
+</script>

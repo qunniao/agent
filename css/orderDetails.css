@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    background: #f3f3f3;
+}
+
+.productItem{
+    width:100%;
+    background: #fff;
+    display: flex;
+    position: relative;
+    margin-bottom: 0.15rem;
+}
+
+.productImg{
+    width: 1.3rem;
+    height: 1.3rem;
+    margin: 0.15rem;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+}
+
+.productName{
+    font-size: 0.22rem;
+    padding-top: 0.15rem;
+}
+
+.price_num{
+    display: flex;
+    margin-top: 0.4rem;
+}
+
+.price{
+    font-size: 0.2rem;
+    color: red;
+}
+
+.num{
+    font-size: 0.2rem;
+    position: absolute;
+    right: 0.2rem;
+}

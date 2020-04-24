@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<link rel="stylesheet" type="text/css" href="css/settlement.css" />
+	<script src="./js/adapt.js"></script>
+	<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+	<script src="./js/methods.js"></script>
+	<title>余额变动	</title>
+</head>
+
+<body>
+	<div id="app">
+		<div class="header" v-for="item in walletHistorys">
+			<span class="biandong" v-if="item.tradeType == 1">变动：+{{item.amount}}</span>
+			<span class="biandong" v-else-if="item.tradeType == 2">余额变动：-{{item.amount}}</span>
+			<span class="yue">余额：{{item.balance}}</span>
+			<span class="time">{{item.gmtCreate}}</span>
+		</div>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript">
+	var serverHost = getServerHost()
+	var app = new Vue({
+		el:'#app',
+		data:{
+			walletHistorys:[]
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				$.ajax({
+					url:serverHost+'/walletHistorys/page',
+					type:'get',
+					dataType:'json',
+					data:{
+						current:1,
+						size:20,
+						agentId:localStorage.uid
+					},
+					success:function(data){
+						that.walletHistorys = data.data.records
+					}
+				})
+			}
+		},
+	})
+	app.findData()
+</script>

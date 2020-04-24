@@ -1,0 +1,215 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.search{
+	width: 100%;
+	height: 0.9rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.search input{
+	width: 80%;
+	height: 0.5rem;
+	border-radius: 0.3rem;
+	border: 0;
+	padding-left: 0.5rem;
+	margin: 0 auto;
+	font-size: 0.22rem;
+	padding-right: 0.2rem;
+}
+
+.search img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	left: 8%;
+}
+
+.order_classification{
+	width: 100%;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	display: flex;
+	align-items: center;
+	background: #FFFFFF;
+}
+
+.orderItem{
+	width: 25%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.orderName{
+	font-size: 0.23rem;
+	color: #5E5E5E;
+}
+
+.active>.orderName{
+	color: #000000;
+	border-bottom: 2px solid #000;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.orderItema{
+	width: 95%;
+	margin-left: 2.5%;
+	border-radius: 0.2rem;
+	background: #fff;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.15rem;
+}
+
+.oderItemTop{
+	width: 100%;
+	height: 0.8rem;
+	border-top-left-radius: 0.2rem;
+	border-top-right-radius: 0.2rem;
+	border-bottom: 1px solid #F3F3F3;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.orderItemTopLeft{
+	display: flex;
+	align-items: center;
+}
+
+.ling{
+	font-size: 0.2rem;
+	color: #C54E52;
+	border: 1.5px solid #C54E52;
+	padding: 0 0.04rem;
+	margin-left: 0.15rem;
+}
+
+.orderNumber{
+	font-size: 0.24rem;
+	color: #333333;
+	padding-left: 0.1rem;
+}
+
+.fangshi{
+	font-size: 0.24rem;
+	color: #C54E52;
+	position: absolute;
+	right: 0.2rem;
+}
+
+.orderCenter{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.shiti{
+	width: 0.8rem;
+	text-align: center;
+	font-size: 0.17rem;
+	color: #508AD3;
+	background: #EDF3FF;
+	margin-left: 0.15rem;
+	margin-top: 0.15rem;
+}
+
+.orderDetails{
+	width: 100%;
+	display: flex;
+	margin-top: 0.15rem;
+}
+
+.orderDetails img{
+	width: 1.3rem;
+	height: 1.3rem;
+	margin-left: 0.15rem;
+	border: 1px solid #f3f3f3;
+}
+
+.name_price{
+	display: flex;
+	flex-direction: column;
+}
+
+.name{
+	font-size: 0.23rem;
+	color: #333333;
+	padding-left: 0.15rem;
+}
+
+.price_num{
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-top: 0.35rem;
+}
+
+.prcie{
+	font-size: 0.26rem;
+	color: red;
+	margin-left: 0.15rem;
+}
+
+.num{
+	font-size: 0.22rem;
+	color: #333;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.heji{
+	line-height: 0.5rem;
+	font-size: 0.24rem;
+	margin-left: 4rem;
+}
+
+.heji b{
+	font-size: 0.26rem;
+	font-weight: normal;
+}
+
+.orderBottom{
+	width: 97%;
+	margin-left: 3%;
+	height: 0.8rem;
+	border-top: 1px solid #F3F3F3;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.twoButtom{
+	position: absolute;
+	right: 0.3rem;
+	display: flex;
+}
+
+.twoButtom button{
+	margin-left: 0.1rem;
+	padding: 0.08rem 0.25rem;
+	border-radius: 0.3rem;
+	border: 0;
+	font-size: 0.22rem;
+}
+
+.twoButtom button:first-child{
+	background: #fff;
+	border: 1px solid #C7C7C7;
+	color: #5A5A5A;
+}
+
+.twoButtom button:last-child{
+	background: #27BC78;
+	color: #fff;
+}

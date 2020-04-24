@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<script src="./js/adapt.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>首页</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="header">
+				<a href="javascript:;">
+					<img :src="cover"/>
+				</a>
+			</div>
+			<!--新品上市-->
+			<div class="newProduct">
+				<span class="title">新品上市</span>
+				<div class="newProductList">
+					<div class="newProductItem" v-for="(item,index) in newProduct" v-if="index<3">
+						<a href="javascript:;">
+							<img :src="item.cover"/>
+							<span class="name">{{item.productName}}</span>
+						</a>
+					</div>
+				</div>
+				<!--明星产品-->
+				<div class="starProduct">
+					<span class="title">明星产品</span>
+					<div class="starProductList">
+						<div class="starProductItem" v-for="item in startProduct">
+							<a href="javascript:;">
+								<div class="starProductItem_img">
+									<img :src="item.productCover" />
+								</div>
+								<div class="starProductItem_right">
+									<span class="advantage">{{item.productName}}</span>
+									<div class="money">
+										<span class="moneyTitle">上新价</span>
+										<span class="price">￥ {{item.price}}</span>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<!--所有产品-->
+				<div class="allProduct">
+					<span class="title">全部产品</span>
+					<div class="allProductList">
+						<div class="allProductItem" v-for="item in allProduct">
+							<a href="javascript:;">
+								<img :src="item.cover"/>
+								<span class="allProductItem_title">{{item.productName}}</span>
+								<div class="allProductItem_price">
+									<span class="allProductItem_price_title">￥</span>
+									<span class="allProductItem_money">{{item.price}}</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="qwe"></div>
+			</div>
+			<div class="footer">
+				<div class="agentItem">
+					<a href="">
+						<img src="./imgs/home2.png"/>
+						<span>首页</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="agent.html">
+						<img src="./imgs/daili1.png"/>
+						<span>加盟店</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="retail.html">
+						<img src="./imgs/lingshou1.png"/>
+						<span>零售</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="mine.html">
+						<img src="./imgs/wode1.png"/>
+						<span>我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<!--<script type="text/javascript">
+	// 对浏览器的UserAgent进行正则匹配，不含有微信独有标识的则为其他浏览器
+	var useragent = navigator.userAgent;
+	if(useragent.match(/WindowsWechat/) == 'WindowsWechat' || useragent.match(/MicroMessenger/i) != 'MicroMessenger') {
+		// 这里警告框会阻塞当前页面继续加载
+		//alert('已禁止本次访问：您必须使用微信内置浏览器访问本页面！');
+		document.head.innerHTML = '<title>抱歉，出错了</title><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0"><link rel="stylesheet" type="text/css" href="https://res.wx.qq.com/open/libs/weui/0.4.1/weui.css">';
+		document.body.innerHTML = '<div class="weui_msg"><div class="weui_icon_area"><i class="weui_icon_info weui_icon_msg"></i></div><div class="weui_text_area"><h4 class="weui_msg_title">请在微信客户端打开链接</h4></div></div>';
+
+	}
+</script>-->
+<script type="text/javascript">
+//接收URL中的参数booksId
+	var code = getUrlParam('code');
+	if(code==null){
+		code=localStorage.code;
+	}
+	var type = getUrlParam('type');
+    console.log(code)
+    
+	var serverHost = getServerHost()
+
+
+	//获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    
+   
+	var app = new Vue({
+		el:"#app",
+		data:{
+			cover:'',
+			productId:'',
+			newProduct:[],
+			startProduct:[],
+			allProduct:[]
+		},
+		methods:{
+			
+			findData:function(){
+				console.log('uid:'+localStorage.uid)
+				var that = app;
+				$.ajax({
+					type:"get",
+					url:serverHost + "/storeAds/info/1",
+					success:function(data){
+						that.cover = data.data[0].cover;
+						that.productId = data.data[0].productId
+					}
+				});
+				$.ajax({
+					type:"get",
+					url:serverHost + "/products/list",
+					data:{
+						productType:0
+					},
+					success:function(data){
+						that.newProduct = data.data
+					}
+				});
+				$.ajax({
+					type:"get",
+					url:serverHost + "/storeAds/info/3",
+					success:function(data){
+						that.startProduct = data.data
+					}
+				});
+				$.ajax({
+					type:"get",
+					url:serverHost + "/products/list",
+					data:{
+						productType:0
+					},
+					success:function(data){
+						that.allProduct = data.data
+					}
+				});
+				$.ajax({
+					url:serverHost + '/login/wxLogin',
+					data:{
+						code:code
+					},
+					dataType:'json',
+					type:'post',
+					success:function(data){
+						console.log(data);
+						if(data.code == 42000){
+							window.location.href = 'passwordLogin.html'
+						} else if(data.data.agent.levelId == 9&&data.data.agent.reviewed == 0&&data.data.agentRegisterReview.orderId == null){
+							layer.open({
+								content: '您还没有选择套餐'
+								,skin: 'msg'
+								,time: 2 //2秒后自动关闭
+							})
+							setTimeout(function () {
+								var trueName = data.data.agent.trueName;
+								var phone = data.data.agent.phone;
+								var region = data.data.agent.region;
+								var levelId =data.data.agent.levelId;
+								var id = data.data.agent.id;
+								window.location.href = 'choicePackage.html?levelId='+levelId+'&contactName='+trueName+'&contactPhone='+phone+'&contactAddress='+region+'&agentId='+id;
+							}, 1000);
+						} else if(data.data.agent.levelId == 9&&data.data.agent.reviewed == 0&&data.data.agentRegisterReview.orderId != null){
+							layer.open({
+								content: '您选择套餐后没有付款，请先付款'
+								,skin: 'msg'
+								,time: 2 //2秒后自动关闭
+							})
+							setTimeout(function () {
+								var id = data.data.agent.id;
+								window.location.href = 'cashier.html?oid='+data.data.agentRegisterReview.orderId+'&agentId='+id
+							}, 1000);
+						} else {
+							localStorage.setItem("uid",data.data.agent.id)
+							localStorage.setItem("openid",data.data.agent.openid)
+							localStorage.setItem('levelId',data.data.agent.levelId)
+							localStorage.setItem('trueName',data.data.agent.trueName)
+							localStorage.setItem('phone',data.data.agent.phone)
+							localStorage.setItem('levelName',data.data.agent.levelName)
+							localStorage.setItem('reviewed',data.data.agent.reviewed)
+							localStorage.setItem("code",code);
+
+							console.log("openid:"+localStorage.openid)
+							let rowVal = {
+								cover: data.data.agent.cover,
+								name: data.data.agent.trueName,
+								phone: data.data.agent.phone,
+								address:data.data.agent.region
+							};
+							localStorage.setItem("rowVal", JSON.stringify(rowVal));
+						}
+					}
+				})
+			}
+		}
+	})
+	
+	
+	//检测有没有登录过
+	function checkLogin(){
+
+		if(localStorage.uid == "null"){
+			console.log("uid为空");
+			if(code!=null){
+				localStorage.setItem("code",code)
+			}
+			//没有登录，跳转到登录页面
+			window.location.href = 'passwordLogin.html'
+		}
+		else{
+			console.log("uid不为空 uid:"+localStorage.uid);
+			//已登录，获取代理商最新信息
+			app.findData();
+		}
+	}
+
+checkLogin();
+
+
+</script>

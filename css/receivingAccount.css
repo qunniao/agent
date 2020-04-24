@@ -1,0 +1,89 @@
+body{
+	margin: 0;
+	background: #F3F3F3;
+}
+
+.header{
+	width: 100%;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+	background: #fff;
+	border-bottom: 1px solid #F1F1F1;
+}
+
+.chakan{
+	font-size: 0.22rem;
+	padding-left: 0.2rem;
+}
+
+.chakan b{
+	font-weight: normal;
+	color: #E23B4D;
+}
+
+.header img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	right: 0.2rem;
+}
+
+.zhanghao{
+	width: 100%;
+	height: 0.9rem;
+	background: #fff;
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.zhanghaoLeft{
+	height: 100%;
+	margin-left: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.add{
+  font-size: 0.5rem;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  color: #595959;
+}
+
+.addzhanghao{
+	font-size: 0.24rem;
+	display: flex;
+	align-items: center;
+	color: #000000;
+}
+
+
+.addzhanghao b{
+	font-size: 0.45rem;
+	color: #595959;
+}
+
+.right{
+	width: 0.15rem;
+	height: 0.15rem;
+	border-top: 0.02rem solid #8C8C8C;
+	border-right: 0.02rem solid #8C8C8C;
+	transform: rotate(45deg);
+	position: absolute;
+	right: 0.3rem;
+	z-index: 10;
+}
+
+.zhanghao input{
+	width: 50%;
+	height: 90%;
+	position: absolute;
+	right: 0;
+	border: 0;
+	background: #fff;
+}

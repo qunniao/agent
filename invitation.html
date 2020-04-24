@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+	<link rel="stylesheet" type="text/css" href="css/footer.css" />
+	<link rel="stylesheet" type="text/css" href="css/invitation.css" />
+	<script src="./js/adapt.js"></script>
+	<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+	<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+	<script src="./js/jquery.js"></script>
+	<script src="./js/methods.js"></script>
+	<title>邀请代理</title>
+</head>
+
+<body>
+	<div id="app">
+		<div class="choose">
+			<span class="chooseTitle">请选择</span>
+			<div class="agentItema" v-for="item in typea" @click='choose(item.id,item.isTask,item.taskAmount,item.nick)'>
+				<div class="left"></div>
+				<div class="right">
+					<span class="title">{{item.nick}}</span>
+				</div>
+			</div>
+			<div class="dibua"></div>
+		</div>
+		<div class="dibu">
+			<span @click="sheng">生成邀请码</span>
+		</div>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript">
+
+	var serverHost = getServerHost()
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			typea:[]
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				$.ajax({
+					url:serverHost+'/agentLevels/list',
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						that.typea = data.data
+					}
+				})
+			},
+			choose:function(e,q,task,ni){
+				$(".agentItema").click(function() {
+		            $(this).addClass('active');
+		        });
+				localStorage.setItem('zh',e)
+			},
+			sheng:function(){
+				console.log(localStorage.zh)
+				if(localStorage.zh == undefined){
+					layer.open({
+						content: '请选择代理等级'
+						,skin: 'msg'
+						,time: 2 
+					})
+				} else {
+				    window.location.href = 'ercode.html'
+				}
+			}
+		},
+	})
+	app.findData()
+	let filter = document.getElementsByClassName("agentItema")
+	for (let i = 0; i < filter.length; i++) {
+		filter[i].addEventListener('click', function () {
+			filter[i].classList.add('active')
+			localStorage.setItem('zh',i)
+			for (let j = 0; j < filter.length; j++) {
+				if (i != j) {
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+
+</script>

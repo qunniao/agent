@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/retail.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>零售</title>
+	</head>
+	<body>
+		<div id="app">
+			<div id="mask"></div>
+		    <div id="login">
+		        <div class="quxiao_quding">
+		        	<div class="asd">
+		        		<textarea id="copy" style="z-index: -1;opacity: 0;">{{copyContent}}</textarea>
+		        		<div id="copy" @click="copy">
+		        			<img src="imgs/borderlands_tiny_tina.jpg"/>
+		        			<span class="quxiao">复制链接</span>
+		        		</div>
+		        	</div>
+		        	<div class="asd" @click="close">
+		        		<textarea id="copy" style="z-index: -1;opacity: 0;">{{copyContent}}</textarea>
+		        		<div id="copy">
+		        			<img src="imgs/borderlands_tiny_tina.jpg"/>
+		        			<span class="queding">推广二维码</span>
+		        		</div>
+		        	</div>
+		        </div>
+	        	<div class="guanbi">
+	        		<img src="imgs/guanbi.png" @click="close"/>
+	        	</div>
+		    </div>
+			<div class="header">
+				<img :src="cover" class="portrait_img"/>
+				<div class="name_phone_mealType">
+					<div class="name_phone">
+						<span class="name">{{name}}</span>
+						<div class="header_right">
+							<a href="storeInformation.html">
+								<img src="imgs/dianpuguanli.png"/>
+								<span class="shop">店铺</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<div class="chakandianpu">
+					<a href="visitor.html">
+						<span class="chakandianpu_title">
+							今天有<b>1</b>人查看了您的店铺
+						</span>
+						<img src="imgs/touxiang.jpg"/>
+					</a>
+				</div>
+				<!--推广店铺和推广商品-->
+				<div class="extension">
+					<div class="extension_shop" id="btn">
+						<img src="imgs/dianpu2.png"/>
+						<span class="extension_shop_title">推广店铺</span>
+					</div>
+					<div class="extension_shop">
+						<a href="extension.html">
+							<img src="imgs/share2.png"/>
+							<span class="extension_shop_title">推广商品</span>
+						</a>
+					</div>
+				</div>
+				<!--订单数-->
+				<div class="order">
+					<div class="order_classification">
+						<span class="filter active">本月</span>
+						<span class="filter">累计</span>
+					</div>
+					<div class="orderNum">
+						<div class="orderNumItem">
+							<a href="">
+								<span class="orderNum_price">0.00</span>
+								<div class="title_img">
+									<span class="orderNum_title">零售销售额</span>
+									<img src="imgs/yeji.png"/>
+								</div>
+							</a>
+						</div>
+						<div class="orderNumItem">
+							<a href="">
+								<span class="orderNum_price">0</span>
+								<div class="title_img">
+									<span class="orderNum_title">零售订单数</span>
+									<img src="imgs/yeji.png"/>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="agentItem">
+					<a href="homePage.html">
+						<img src="./imgs/home1.png"/>
+						<span>首页</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="agent.html">
+						<img src="./imgs/daili1.png"/>
+						<span>加盟店</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="javascript:;">
+						<img src="./imgs/lingshou2.png"/>
+						<span>零售</span>
+					</a>
+				</div>
+				<div class="agentItem">
+					<a href="mine.html">
+						<img src="./imgs/wode1.png"/>
+						<span>我的</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let filter = document.getElementsByClassName("filter")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+			filter[i].classList.add('active')
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+</script>
+<script type="text/javascript">
+	window.onload=function(){
+        var btn=document.getElementById("btn");
+        var mask=document.getElementById("mask");
+        var login=document.getElementById("login");
+        btn.onclick=function(){
+            mask.style.display="block";
+            login.style.display="inline-block";
+        };
+        var close_login=document.getElementById("mask");
+        close_login.onclick=function(){
+            mask.style.display="none";
+            login.style.display="none";
+        };
+    };
+    var app = new Vue({
+		el:'#app',
+		data:{
+			copyContent:window.location.href,
+			cover:'',
+			name:""
+		},
+		methods:{
+			findData:function(){
+				var that= app;
+				that.cover = JSON.parse(localStorage.rowVal).cover;
+				that.name = JSON.parse(localStorage.rowVal).name
+			},
+			close(){
+				mask.style.display="none";
+            	login.style.display="none";
+			},
+			copy(){
+				var e = document.getElementById("copy");
+			    e.select(); // 选择对象
+			    document.execCommand("Copy"); // 执行浏览器复制命令
+				mask.style.display="none";
+            	login.style.display="none";
+			    layer.open({
+					content: '链接复制成功'
+					,skin: 'msg'
+					,time: 2 
+				})
+			}
+		}
+	})
+	app.findData()
+</script>

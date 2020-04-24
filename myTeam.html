@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/myTeam.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>我的关系</title>
+	</head>
+	<body>
+		<div class="header">
+			<div class="cengji">
+				<span class="cengjiTitle">层级关系</span>
+				<img src="imgs/GoBottom.png"/>
+			</div>
+			<div class="search">
+				<input type="text" placeholder="输入姓名/昵称/手机号搜索"/>
+				<img src="imgs/dingwei.png"/>
+			</div>
+		</div>
+		<div class="guanxiList">
+			<div class="guanxiItem">层级关系</div>
+			<div>层级关系</div>
+		</div>
+		<div class="classification">
+			<span class="classificationItem active">直属上级0</span>
+			<span class="classificationItem">所有下级0</span>
+			<span class="classificationItem">我的上级</span>
+		</div>
+		<div class="guanxiLista">
+			<!-- <div class="guanItem">
+				<span class="guanTitle">我的直属上级</span>
+				<div class="guanxiDetails">
+					<img src="imgs/children_game_concept02.jpg"/>
+					<span class="name">郭</span>
+					<span class="dengji">市代</span>
+				</div>
+			</div>
+			<div class="guanItem">
+				<span class="guanTitle">我的直属上级</span>
+				<div class="guanxiDetails">
+					<img src="imgs/children_game_concept02.jpg"/>
+					<span class="name">郭</span>
+					<span class="dengji">市代</span>
+				</div>
+			</div> -->
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$(".cengji").click(function() {
+			$(".guanxiList").slideToggle("slow");
+		});
+	});
+	$(function() {
+		//第一种方法
+		$(".guanxiList div").each(function(index) {
+			$(this).click(function() {
+				$(".guanxiList div").eq(index).addClass("guanxiItem").siblings().removeClass("guanxiItem");
+			})
+		})
+		let filter = document.getElementsByClassName("classificationItem")
+		for(let i=0;i<filter.length;i++){
+			filter[i].addEventListener('click',function(){
+				filter[i].classList.add('active')
+				for(let j=0;j<filter.length;j++){
+					if(i!=j){
+						filter[j].classList.remove('active')
+					}
+				}
+			})
+		}
+	});
+</script>

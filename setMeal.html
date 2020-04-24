@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css" />
+		<link rel="stylesheet" type="text/css" href="css/setMeal.css" />
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<title>代理注册</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="dailidengji">
+				<span class="dengji">当前等级: VIP399套餐</span>
+				<span class="cxchoose" @click="choose">重新选择</span>
+			</div>
+			<div class="mealItem">
+				<img src="imgs/borderlands_tiny_tina.jpg"/>
+				<div class="name_price_choose">
+					<span class="name">甜蜜蜜</span>
+					<div class="price_choose">
+						<span class="price">￥146.00</span>
+						<span class="choose" @click='yiChoose'>{{choose}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="mealItem">
+				<img src="imgs/borderlands_tiny_tina.jpg"/>
+				<div class="name_price_choose">
+					<span class="name">甜蜜蜜</span>
+					<div class="price_choose">
+						<span class="price">￥146.00</span>
+						<span class="choose" @click='yiChoose'>{{choose}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="mealItem">
+				<img src="imgs/borderlands_tiny_tina.jpg"/>
+				<div class="name_price_choose">
+					<span class="name">甜蜜蜜</span>
+					<div class="price_choose">
+						<span class="price">￥146.00</span>
+						<span class="choose" @click='yiChoose'>{{choose}}</span>
+					</div>
+				</div>
+			</div>
+			<div class="mealItema">
+				<span class="all">已加载全部</span>
+			</div>
+			<div class="bottom">
+				<span class="jine">金额:<b>￥0.00</b></span>
+				<div class="right">
+					<span class="dabiao">还未选择商品</span>
+					<button>下单购买</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			choose:'选择'
+		},
+		methods:{
+			choose:function(){
+				window.history.go(-1);
+			},
+			yiChoose:function(){
+				var that = app;
+				that.choose = '已选择'
+			}
+		}
+	})
+</script>

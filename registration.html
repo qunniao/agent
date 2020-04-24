@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css" />
+		<link rel="stylesheet" type="text/css" href="css/registration.css" />
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>加盟店注册</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div id="mask"></div>
+			<div id="login">
+				<div class="loginTop">
+					<span class="title">《加盟商制度》</span>
+				</div>
+				<!-- <div class="content">
+					为了维护《创新卓顺新零售》项目可以在市场有序地进行，使市场获得持续、健康地发展，经公司研究，制定保证金管理制度。</br>
+
+						一、 代理商缴纳保证金的目的</br>
+
+						1、保证各级代理商在合同规定的范围内经销。</br>
+
+						2、保证各级代理商执行公司的价格体系和促销政策，不发生窜货/乱价行为。</br>
+
+						3、保证各级代理商不擅自单方面解除代理合同。</br>
+
+						4、保证各级代理商维护  创新卓顺   公司的企业形象和合法权益。</br>
+
+						5、保证各级代理商遵守和执行代理合同的约定内容及其他  创新卓顺   公司的营销制度和政策。</br>
+
+						6、保证各级代理商获得优势价格以及充足的货源。</br>
+
+						二、 代理商缴纳保证金的标准</br>
+
+						凡初次加入公司的代理商都应缴纳保证金。保证金数额和缴纳时间以系统显示的具体数额为准。</br>
+
+						三、 代理商保证金的缴纳程序</br>
+
+						1、保证金缴纳时间：代理商签订代理合同后，3个工作日内，将保证金打入   创新卓顺      公司指定的保证金专管账户。代理商升级后，需在3个工作日内补齐保证金款项，否则视为自动放弃代理授权，不予发货。</br>
+
+						2、 保证金制度执行时间：</br>
+
+						2.1新加入代理商从此制度下发之日起执行。</br>
+
+						3、 保证金不得作为货款使用。</br>
+
+						4、保证金汇入方法：代理商汇入保证金时，必须要求其以签订合同时使用的名称对应账号汇入，尤其个体经营者，在汇入保证金时必须标明汇款企业全称，汇款用途中应标注此款项为保证金。</br>
+
+						四、代理商保证金的扣罚</br>
+
+						1、经发现代理商出现乱价、超范围调货、窜货等违约行为的，首次行为扣除保证金1000元。</br>
+
+						2、经发现代理商恶意压制下级代理商升级等违约行为的，首次行为扣除保证金1000元，以下行为视为恶意压制下级代理升级：</br>
+
+						3、经发现代理商出现售假、行贿我方人员、虚假宣传等违约行为的，首次行为扣除保证金2000元。</br>
+
+						4、经发现代理商接到消费者投诉3日内未进行处理的，或者处理不当导致消费者持续/二次投诉的，首次行为扣除保证金3000元。</br>
+
+						5、以下行为公司有权单方终止本协议，扣除全部保证金，取消授权，永不合作，并要求代理商承担 5000  元的违约金，违约金数额不足以弥补由此给公司造成的损失的，公司有权要求乙方予以赔偿。</br>
+
+						5.1第二次发现代理出现上述违约行为；</br>
+
+						5.2若代理首次违约行为给公司/其余代理商/消费者等第三人造成  200 元直接/间接损失或者经媒体/网络等报道、第三人投诉给公司/其余代理商/消费者造成不良影响的；</br>
+
+						6、在扣除部分或全部保证金后的一周内，代理商需补齐规定的保证金款项，否则  创新卓顺     公司有权从代理商货款中扣除相应金额。</br>
+
+						五、代理商保证金的返还</br>
+
+						1、 保证金期限：代理商签订合同开始至代理商终止合同；</br>
+
+						2、按照以下情形予以返还：保证金的退还不支付利息，在双方解除代理合同关系后的一个月内，如代理商没有违反本制度，且货款已结清，可提交申请返还代理商保证金；</br>
+
+						3、在未解除代理合同前，中途不予返还部分或全部保证金金额，不得挪做货款使用；</br>
+
+						4、协议到期，代理与公司双方可协商一致后续签协议，原保证金将全额无息转结为新协议的保证金;若代理商不再与公司续签协议，则公司将保证金返还给代理商。</br>
+
+						六、本规定自二〇一九年七月  十八 日起正式执行。222</br>
+
+						其他协议仅提供给已合作客户，如有需要请联系跟你对接的客户经理。
+				</div> -->
+				<button class="zhende" @click='guanbi'>确定</button>
+			</div>
+			<div class="header">
+				<span class="title">您正在通过<b>{{zhuceName}}</b>进行注册，如若不对，请重新联系邀请人注册</span>
+				<p class="dangqian">当前选择:&nbsp;&nbsp;{{grade}}</p>
+			</div>
+			<div class="item">
+					<span class="name">真实姓名</span>
+					<input type="text" id="trunName" placeholder="请输入姓名" />
+				</div>
+			<div class="item" id="yincas">
+				<span class="name">加盟店名称</span>
+				<input type="text" id="name" placeholder="请输入加盟店名称" />
+			</div>
+			<div class="item">
+				<span class="name">手机号码</span>
+				<input type="text" id="phone" placeholder="请输入手机号码" />
+			</div>
+			<div class="item" id="yincasa">
+				<span class="name">地址</span>
+				<div class="bzd">
+					<input type="text" placeholder="请输入送货地址" id="address" class="thirda"/>
+				</div>
+			</div>
+			<div class="item" id="yincasb">
+				<span class="name">管理员手机号 (选填)</span>
+				<div class="bzd">
+					<input type="text" id="glPhone" placeholder="请输入管理员手机号" class="thirda" />
+				</div>
+			</div>
+			<div class="item">
+				<span class="name">设置密码</span>
+				<div class="bzd">
+					<input type="password" id="pass" placeholder="请输入需要设置的密码" class="thirda" />
+					<img :src="password" @click="pass">
+				</div>
+			</div>
+			<input class="submit" type="button" id="accept" disabled="true" value="立即注册" @click='submit' />
+			<div class="agreement">
+				<input type="checkBox" class="tongyi" onclick="if (this.checked) {enable()} else {disable()}">同意协议<b class="zhidu" id="btn">《《加盟商制度》》</b>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	
+	//获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+    var code = getUrlParam('code');
+	if(code==null){
+		code=localStorage.code;
+	}
+	var openid = localStorage.openid;
+	console.log("code:"+code);
+	console.log("openid:"+openid);
+    var levelId = getUrlParam('levelId');
+	var nick = getUrlParam('nick');
+    
+    var serverHost = getServerHost();
+    
+	var app = new Vue({
+		el: '#app',
+		data: {
+			grade:'',
+			password: 'imgs/xianshi.png',
+			zhuceName:''
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				var result = decodeURI(escape(nick));
+				that.grade = result;
+				if(levelId == 8){
+					document.getElementById('yincas').style.display = 'none';
+					document.getElementById('yincasa').style.display = 'none';
+					document.getElementById('yincasb').style.display = 'none'
+				}
+				$.ajax({
+					url:serverHost + '/agents/info/'+localStorage.zhuceId,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						if(data.code == 4130){
+							that.zhuceName = '总部'
+						} else {
+							if(data.code==200 && data.data==null){
+								that.zhuceName = '总部'
+							}else if(data.code==200 && data.data!=null){
+								that.zhuceName = data.data.trueName
+							}
+							
+						}
+					}
+				})
+			},
+			submit: function() {
+				var trunName = $('#trunName').val();//真实姓名
+				var administratorsPhone = $('#glPhone').val();//管理员手机号
+				var name = $('#name').val();//加盟店名称
+				var phone = $('#phone').val();//手机号码
+				var address = $('#address').val();//地址
+				var pass = $('#pass').val()//设置密码
+				console.log("submit levelId:"+levelId);
+				if(levelId == 8){
+					if(trunName == ''){
+						layer.open({
+							content: '请填写真实姓名'
+							,skin: 'msg'
+							,time: 2 //2秒后自动关闭
+						})
+						return false; 
+					} else if (phone == ''){
+						layer.open({
+							content: '请填写您的手机号码'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if (!(/^1[3456789]\d{9}$/.test(phone))){
+						layer.open({
+							content: '手机号错误，请重新输入'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if (pass == ''){
+						layer.open({
+							content: '请设置您的密码'
+							,skin: 'msg'
+							,time: 2 
+						})
+						return false; 
+					}
+				} else if(levelId == 9){
+					if(trunName == ''){
+						layer.open({
+							content: '请填写真实姓名'
+							,skin: 'msg'
+							,time: 2 //2秒后自动关闭
+						})
+						return false; 
+					} else if (name == ''){
+						layer.open({
+							content: '请填写加盟店名称'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if (phone == ''){
+						layer.open({
+							content: '请填写您的手机号码'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if (!(/^1[3456789]\d{9}$/.test(phone))){
+						layer.open({
+							content: '手机号错误，请重新输入'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if(address == ''){
+						layer.open({
+							content: '请填写地址'
+							,skin: 'msg'
+							,time: 2
+						})
+						return false; 
+					} else if (pass == undefined){
+						layer.open({
+							content: '请设置您的密码'
+							,skin: 'msg'
+							,time: 2 
+						})
+						return false; 
+					}
+				}
+				console.log("code:"+code);
+				var agentDto = {"adminPhone":administratorsPhone,"openid":openid,"inviter":localStorage.zhuceId,"password":pass,"phone":phone,"region":address,"storeName":name,"trueName":trunName};
+				var agentDtoasd = {"openid":openid,"superior":0,'inviter':localStorage.zhuceId,"password":pass,"levelId":levelId,"trueName":trunName,"phone":phone}
+				if(levelId ==8 ){
+					$.ajax({
+						url:serverHost + '/agents/register',
+						type:'post',
+						dataType:'json',
+						headers:{
+							'Content-Type': "application/json;charset=UTF-8"
+						},
+						data:JSON.stringify(agentDtoasd),
+						success:function(data){
+							if(data.code == 200){
+								layer.open({
+									content: '注册成功'
+									,skin: 'msg'
+									,time: 2 
+								})
+								setTimeout(function () {
+									window.location.href = 'index.html'
+								})
+							} else if(data.code == 41031){
+								layer.open({
+									content: '代理已存在'
+									,skin: 'msg'
+									,time: 2 
+								})
+								return false;
+							} else if(data.code == 41030){
+								layer.open({
+									content: '您已经注册'
+									,skin: 'msg'
+									,time: 2 
+								})
+								setTimeout(function () {
+									window.location.href = 'choicePackage.html'
+								}, 100);
+							}
+						}
+					})
+				} else if(levelId == 9){
+					$.ajax({
+						type:"post",
+						url:serverHost + "/agents/register/franchisee",
+						dataType:'json',
+						headers:{
+							'Content-Type': "application/json;charset=UTF-8"
+						},
+						data:JSON.stringify(agentDto),
+						success:function(data){
+							console.log("submit data:");
+							console.log(data);
+							if(data.code == 41031){
+								layer.open({
+									content: '代理已存在'
+									,skin: 'msg'
+									,time: 2 
+								})
+								return false;
+							} else if(data.code == 200){
+								layer.open({
+									content: '注册成功'
+									,skin: 'msg'
+									,time: 2 
+								})
+								setTimeout(function () {
+									window.location.href = 'choicePackage.html?levelId='+levelId+'&contactName='+trunName+'&contactPhone='+phone+'&contactAddress='+address+'&agentId='+data.data.id;
+								}, 1000);
+							}else if(data.code == 41035){
+								layer.open({
+									content: '管理员不存在'
+									,skin: 'msg'
+									,time: 2 
+								})
+							}
+						}
+					});
+				}
+			},
+			pass:function(){
+				if(this.password == 'imgs/xianshi.png'){
+					this.password = 'imgs/yincang.png';
+					document.getElementById('pass').type = 'text'
+				} else if(this.password == 'imgs/yincang.png'){
+					this.password = 'imgs/xianshi.png';
+					document.getElementById('pass').type = 'password'
+				}
+			},
+			guanbi:function(){
+				document.getElementById("mask").style.display = 'none';
+				document.getElementById("login").style.display = 'none'
+			}
+		}
+	})
+
+	app.findData();
+
+	function disable() {
+		document.getElementById("accept").disabled = true;
+		document.getElementById("accept").style.background = "#BEEBD6"
+	}
+
+	function enable() {
+		document.getElementById("accept").disabled = false;
+		document.getElementById("accept").style.backgroundColor = 'green'
+	}
+
+	window.onload = function() {
+		var btn = document.getElementById("btn");
+		var mask = document.getElementById("mask");
+		var login = document.getElementById("login");
+		btn.onclick = function() {
+			mask.style.display = "block";
+			login.style.overflow = "scroll";
+			login.style.display = "block";
+		};
+		$('#mask').bind("touchmove",function(e){
+                e.preventDefault();
+     	});
+     	$('#login>#mask').bind("touchmove",function(e){
+                e.preventDefault();
+     	});
+		var close_login = document.getElementById("mask");
+		close_login.onclick = function() {
+			mask.style.display = "none";
+			login.style.display = "none";
+		};
+	};
+</script>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/myOrder.css"/>
+	    <script type="text/javascript" src="js/jquery.js"></script>
+	    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title>订单列表</title>
+	</head>
+	<body>
+		<div class="search">
+			<input type="text" placeholder="搜索订单信息"/>
+			<img src="imgs/search.png"/>
+		</div>
+		<div class="order_classification">
+			<div class="orderItem active">
+				<span class="orderName">全部</span>
+			</div>
+			<div class="orderItem">
+				<span class="orderName">待付款</span>
+			</div>
+			<div class="orderItem">
+				<span class="orderName">待发货</span>
+			</div>
+			<div class="orderItem">
+				<span class="orderName">待收货</span>
+			</div>
+		</div>
+		<div class="orderItema">
+			<div class="oderItemTop">
+				<div class="orderItemTopLeft">
+					<span class="ling">零</span>
+					<span class="orderNumber">L1572336921418016</span>
+				</div>
+				<span class="fangshi">待付款</span>
+			</div>
+			<div class="orderCenter">
+				<div class="shiti">实体订单</div>
+				<div class="orderDetails">
+					<img src="imgs/borderlands_tiny_tina.jpg"/>
+					<div class="name_price">
+						<span class="name">单件</span>
+						<div class="price_num">
+							<span class="prcie">￥198.00</span>
+							<span class="num">x4</span>
+						</div>
+					</div>
+				</div>
+				<span class="heji">合计：<b>￥792.00</b></span>
+			</div>
+			<div class="orderBottom">
+				<div class="twoButtom">
+					<button>取消订单</button>
+					<button>立即支付</button>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	let filter = document.getElementsByClassName("orderItem")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+			filter[i].classList.add('active')
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+</script>

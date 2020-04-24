@@ -1,0 +1,206 @@
+body{
+	background: #FFFFFF;
+	margin: 0;
+}
+
+.ovfHiden{
+	overflow: hidden;
+	height: 100%;
+}
+
+.header{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+.header .title{
+	width: 90%;
+	font-size: 0.23rem;
+	color: #333333;
+	margin-top: 0.6rem;
+	line-height: 0.35rem;
+}
+
+.header .title b{
+	font-weight: normal;
+	color: #2CC084;
+	padding: 0 0.1rem;
+}
+
+.dangqian{
+	font-size: 0.23rem;
+	color: #656565;
+}
+
+.item{
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	border-bottom: 1px solid #E9E9E9;
+	margin-top: 0.15rem;
+}
+
+.item:first-child{
+	margin-top: 0.5rem;
+}
+
+.name{
+	font-size: 0.26rem;
+	color: #000;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+.item input{
+	height: 0.75rem;
+	border: 0;
+	font-size: 0.23rem;
+	padding: 0;
+}
+
+.bzd{
+	display: flex;
+	align-items: center;
+}
+
+.bzd img{
+	width: 0.25rem;
+	height: 0.25rem;
+}
+
+.yanzhegnma{
+	width: 30%;
+	height: 0.75rem;
+	border: 0;
+	background: #FFFFFF;
+	font-size: 0.24rem;
+	color: #8CD5B7;
+}
+
+.thirda{
+	width: 90%;
+}
+
+.password{
+	width: 0.25rem;
+	height: 0.25rem;
+	margin-left: 0.1rem;
+}
+
+.submit{
+	font-size: 0.26rem;
+	color: #FFFFFF;
+	background: #BEEBD6;
+	width: 85%;
+	margin: 0 auto;
+	height: 0.8rem;
+	border-radius: 0.4rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0.5rem;
+	border: 0;
+	outline:none;
+	opacity: 1;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.agreement{
+	width: 90%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	margin-top: 0.4rem;
+	font-size: 0.22rem;
+	padding-bottom: 1rem;
+}
+
+
+.agreement .input{
+	width: 0.25rem;
+	height: 0.25rem;
+	border: 1px solid #F0F0F0;
+	background: #FFFFFF;
+	border-radius: 0;
+}
+
+.tongyi{
+	font-size: 0.22rem;
+	padding-left: 0.1rem;
+	width: 0.25rem;
+	height: 0.25rem;
+}
+
+.zhidu{
+	font-weight: normal;
+	color: #16A2FF;
+}
+
+#login{
+    display:none;
+    width:100%;
+    position:fixed;
+    bottom:0;
+    height: 20%;
+    z-index: 1000;
+    border-top-left-radius: 0.15rem;
+    border-top-right-radius: 0.15rem;
+    background: #FFFFFF;
+}
+
+#mask{
+    display:none;
+    background:rgba(0,0,0,0.4);
+    width:100%;
+    height:100%;
+    position:fixed;
+    z-index: 100;
+}
+
+.loginTop{
+	width: 100%;
+	height: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-bottom: 1px solid #F0F0F0;
+	position: fixed;
+	z-index: 1000;
+	background: #FFFFFF;
+}
+
+.loginTop .title{
+	font-size: 0.24rem;
+	color: #333333;
+}
+
+.content{
+	width: 95%;
+	margin: 0 auto;
+	font-size: 0.22rem;
+	margin-top: 0.8rem;
+	padding-bottom: 0.9rem;
+}
+
+.zhende{
+	width: 100%;
+	height: 0.7rem;
+	position: fixed;
+	bottom: 0;
+	background: #2CC084;
+	border: 0;
+	font-size: 0.26rem;
+	color: #FFFFFF;
+}
+
+.bzd select{
+	width: 100%;
+	height: 0.7rem;
+	border: 0;
+}

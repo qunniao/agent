@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css" />
+		<link rel="stylesheet" type="text/css" href="css/agentRegistration.css" />
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+		<title>注册</title>
+	</head>
+
+	<body>
+		<div id="app">
+			<div class="choose">
+				<span class="chooseTitle">请选择</span>
+				<div class="agentItema" v-for="item in level" @click='choose(item.id,item.isTask,item.taskAmount,item.nick)'>
+					<div class="left"></div>
+					<div class="right">
+						<span class="title">{{item.nick}}</span>
+						<span class="content">{{item.registPrompt}}</span>
+					</div>
+				</div>
+				<div class="dibua"></div>
+			</div>
+			<div class="dibu">
+				<div class="leixing">您正在通过<b>{{typeName}}</b>进行注册</div>
+				<button @click='submit'>确认</button>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript">
+	var code = getUrlParam('code');
+	console.log("code:"+code);
+	localStorage.setItem("code",code);
+	//获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+ 
+    
+	var serverHost = getServerHost()
+	
+	var app = new Vue({
+		el:'#app',
+		data:{
+			level:[],
+			typeName:''
+		},
+		methods:{
+			findData:function(){
+				var that = app;
+				localStorage.removeItem("agent")
+				$.ajax({
+					url:serverHost + '/agentLevels/list',
+					type:'get',
+					success:function(data){
+						that.level = data.data
+					}
+				})
+				$.ajax({
+					url:serverHost + '/agents/info/'+localStorage.zhuceId,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						if(data.code == 4130){
+							that.typeName = '总部'
+						} else {
+							if(data.code==200 && data.data==null){
+								that.typeName = '总部'
+							}else if(data.code==200 && data.data!=null){
+								that.typeName = data.data.trueName
+							}
+							
+						}
+					}
+				})
+				
+			},
+			choose:function(e,q,task,ni){
+				$(".agentItema").click(function() {
+		            $(".agentItema").removeClass('active');
+		            $(this).addClass('active');
+		        });
+				isTask = q;
+				levelId = e;
+				taskAmount = task;
+				nick = ni;
+				console.log(e)
+				localStorage.setItem("agent",e)
+			},
+			submit:function(){
+				var that = app;
+				if(levelId == 8){
+					window.location.href = 'registration.html?levelId='+levelId+'&nick='+nick
+					
+				} else {
+					window.location.href = 'registration.html?levelId='+levelId+'&nick='+nick
+				}
+			}
+		}
+	})
+	app.findData()
+	let filter = document.getElementsByClassName("agentItema")
+	for(let i = 0; i < filter.length; i++) {
+		filter[i].addEventListener('click', function() {
+			filter[i].classList.add('active')
+			console.log(i)
+			localStorage.setItem("agent",i)
+			for(let j = 0; j < filter.length; j++) {
+				if(i != j) {
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+	
+
+	function wxLogin(){
+		$.ajax({
+					url:serverHost + '/login/getWxOpenId',
+					data:{
+						code:code
+					},
+					dataType:'json',
+					type:'post',
+					success:function(data){
+						console.log(data);
+						if(data.code == 200){
+							localStorage.setItem("openid",data.data.openid);
+						} 
+					}
+				})
+		
+	}
+	wxLogin();
+</script>

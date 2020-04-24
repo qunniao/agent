@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/account.css">
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+    <title>转账记录</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="accountItem" v-for="item in account">
+            <span class="name">收款人: {{item.trueName}}</span>
+            <span class="money">金额: {{item.amount}}</span>
+            <span class="time">{{item.gmtCreate}}</span>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            account: []
+        },
+        methods: {
+            findData: function () {
+                var that = app;
+                $.ajax({
+                    url: serverHost+'/transfer/page',
+                    type: 'get',
+                    dataType: 'json',
+                    data: {
+                        current: 1,
+                        size: 20,
+                        agentId: localStorage.uid
+                    },
+                    success: function (data) {
+                        that.account = data.data.records
+                    }
+                })
+            }
+        },
+    })
+    app.findData()
+</script>

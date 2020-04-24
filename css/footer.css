@@ -1,0 +1,37 @@
+.footer{
+	width: 100%;
+	height: 1rem;
+	position: fixed;
+	bottom: 0;
+	border-top: 0.01rem solid #eee;
+	display: flex;
+	background: #fff;
+}
+
+.agentItem{
+	width: 25%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.agentItem a{
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	color: #666;
+	text-decoration: none;
+}
+
+.agentItem img{
+	width: 0.35rem;
+	height: 0.35rem;
+}
+
+.agentItem span{
+    font-size: 0.20rem;
+    padding-top: 0.05rem;
+}

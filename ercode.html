@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邀请代理</title>
+    <script src="./js/vue.js"></script>
+    <script src="./js/qrcode.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="./js/methods.js"></script>
+    <link rel="stylesheet" href="./css/ercode.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="x-qrcode">
+                <span class="name">{{name}} 的邀请码</span>
+            <div id="qrcode"></div>
+            <div class="erweima">
+                <!-- <span class="changan">长按保存二维码</span> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            name:''
+        },
+        methods: {
+            findData: function () {
+                var that = app;
+                that.qrcode = new QRCode('qrcode', {
+                    width: 200,
+                    height: 200,
+                    text: 'http://ws.zhanchengwlkj.com/zhuce.html?id='+localStorage.uid,
+                    coloeDark:"#000000",
+                    coloeLight:"#ffffff",
+                })
+                $.ajax({
+					url:serverHost + '/agents/info/'+localStorage.uid,
+					type:'get',
+					dataType:'json',
+					success:function(data){
+						that.name = data.data.trueName
+					}
+				})
+            }
+        },
+    })
+    app.findData()
+</script>

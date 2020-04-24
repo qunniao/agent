@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+    <title>账号密码登录</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #app {
+            margin-top: 2rem;
+        }
+
+        .name {
+            width: 100%;
+            height: 0.6rem;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.3rem;
+            margin-left: 0.3rem;
+            margin-top: 0.5rem;
+        }
+
+        .name input {
+            width: 65%;
+            height: 80%;
+           
+            padding-left: 0.15rem;
+            margin-left: 0.05rem;
+        }
+
+        .trueName {
+            font-size: 0.22rem;
+            padding-left: 0.15rem;
+        }
+
+        .submit {
+            width: 100%;
+            height: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit button {
+            width: 80%;
+            height: 100%;
+            border-radius: 0.35rem;
+            background: #27BC78;
+            border: 0;
+            font-size: 0.24rem;
+            color: #fff;
+            margin-top: 2rem;
+        }
+
+        #huoqu {
+            font-size: 0.22rem;
+            background: #fb312f;
+            color: #fff;
+            border: 0;
+            border-radius: 0.4rem;
+        }
+
+        .name:nth-child(3) input {
+            width: 30%;
+         
+        }
+
+        .form-control {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="name">
+            <span class="trueName">手机号：</span>
+            <input type="text" id="phone" placeholder="请输入手机号" class="form-control">
+        </div>
+        <div class="name">
+            <span class="trueName">密&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+            <input type="password" id="pass" placeholder="请输入密码" class="form-control">
+        </div>
+        <div class="name">
+            <span class="trueName">验证码：</span>
+            <input type="text" id="yanzhengma" placeholder="请输入验证码" class="form-control">
+            <button class="btn" id="huoqu" @click="huoqu()" style="width:30%;height: 90%;margin-left:0.15rem;">{{content}}</button>
+        </div>
+        <div class="submit">
+            <button @click="submit">登录</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId  decodeURI(escape(nick))
+    var code = getUrlParam('code');
+    console.log("code:"+code);
+    if(code==null)code = localStorage.code;
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            content:'获取验证码',
+            flag:false,//手机号码boolean
+            yzmflag:false,//验证码boolean
+            errorMsg:'',//错误信息
+            errorYzm:'验证码有误，请重新输入',
+            totalTime: 60 ,     //记录具体倒计时时间
+            timer: 'cloak',  // 定时器名称
+            canClick: true //添加canClick  判断按钮能否点击
+        },
+        methods: {
+            //获取验证码
+            huoqu: function () {
+                var that = app;
+                var phone = $("#phone").val();
+                var yanzhengma = $("#yanzhengma").val()
+                if (phone == '') {
+                    layer.open({
+                        content: '请先输入手机号',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                } else if (!(/^1[35789]\d{9}$/.test(phone))) {
+                    layer.open({
+                        content: '手机号输入错误，请确认后重新输入',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                } else {
+                    console.log(12321312)
+                    that.flag = false;
+                    document.getElementById('huoqu').style.background = '#808080'
+                    if (!this.canClick) return //改动的是这两行代码,限制点击
+                    this.canClick = false
+                    that.content = that.totalTime + 's后重新发送' //这里解决60秒不见了的问题
+                    that.cloak = setInterval(function () {
+                        that.totalTime--
+                        if (that.totalTime > 0) {
+                            that.content = that.totalTime + 's后重新发送'
+                        }
+                        if (that.totalTime <= 0) { //当倒计时小于等于0时清除定时器
+                            window.clearInterval(that.cloak)
+                            that.content = '重新发送验证码';
+                            that.totalTime = 60;
+                            that.canClick = true //这里重新开启
+                            document.getElementById('huoqu').style.background = '#fb312f'
+                        }
+                    }, 1000)
+                }
+                $.ajax({
+                    url: serverHost + '/sms/send/sms',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        phone: phone
+                    },
+                    success(res) {
+                        console.log(1231)
+                    }
+                })
+            },
+            submit: function () {
+                var phone = $("#phone").val();
+                var pass = $("#pass").val();
+                var yanzhengma = $("#yanzhengma").val()
+                console.log(yanzhengma)
+                if (phone == '') {
+                    layer.open({
+                        content: '请先输入手机号',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                } else if (!(/^1[35789]\d{9}$/.test(phone))) {
+                    layer.open({
+                        content: '手机号输入错误，请确认后重新输入',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                } else if (pass == '') {
+                    layer.open({
+                        content: '密码不能为空',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                } else if (yanzhengma == '') {
+                    layer.open({
+                        content: '请输入验证码',
+                        skin: 'msg',
+                        time: 2 //2秒后自动关闭
+                    });
+                    return false;
+                }
+                console.log("wxCode:"+code);
+                $.ajax({
+                    url: serverHost + '/login/account',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        phone: phone,
+                        password: pass,
+                        wxCode:code,
+                        code: yanzhengma
+                        
+                    },
+                    success: function (data) {
+                        if (data.code == 200) {
+                            layer.open({
+                                content: '登录成功',
+                                skin: 'msg',
+                                time: 2 //2秒后自动关闭
+                            });
+                            let rowVal = {
+                                cover: data.data.agent.cover,
+                                name: data.data.agent.trueName,
+                                phone: data.data.agent.phone,
+                                address: data.data.agent.region,
+                                id: data.data.agent.id
+                            };
+                            localStorage.setItem('uid', data.data.agent.id)
+                            localStorage.setItem('levelId',data.data.agent.levelId)
+                            localStorage.setItem('openid', data.data.agent.openid)
+                            localStorage.setItem("rowVal", JSON.stringify(rowVal));
+                            localStorage.setItem("code",code);
+                            setTimeout(function () {
+                                window.location.href = 'homePage.html?type=' + 'pass'
+                            }, 100);
+                        } else if (data.code == 41003) {
+                            layer.open({
+                                content: '账号或密码错误',
+                                skin: 'msg',
+                                time: 2 //2秒后自动关闭
+                            });
+                            return false;
+                        } else if (data.code == 41030) {
+                            layer.open({
+                                content: '获取accessToken失败',
+                                skin: 'msg',
+                                time: 2 //2秒后自动关闭
+                            });
+                            setTimeout(function () {
+                                window.location.href = 'passwordLogin.html'
+                            }, 1000);
+                            //window.location.href = 'passwordLogin.html'
+                        } else if (data.code == 41006) {
+                            layer.open({
+                                content: '验证码错误',
+                                skin: 'msg',
+                                time: 2 //2秒后自动关闭
+                            });
+                            return false;
+                        } else if (data.code == 41042) {
+                            layer.open({
+                                content: '验证码过期，请重新获取验证码',
+                                skin: 'msg',
+                                time: 2 //2秒后自动关闭
+                            });
+                            return false;
+                        }
+                    }
+                })
+            },
+            pushHistory() {
+                let state = {
+                    title: '',
+                    url: window.location.href
+                };
+                window.history.pushState(state, state.title, state.url);
+                console.log(123)
+            }
+        },
+    })
+</script>
+<script>
+    (function () {
+        if (window.location.hash == "") {
+            history.pushState(null, null, "#1") //一访问页面即添加一条记录b.html -> b.html#1
+        }
+
+        window.onpopstate = function (event) { //当用户按下返回键，b.html#1 -> b.html，并触发该事件
+            history.pushState(null, null, "#1")
+            return false;
+        };
+    })();
+</script>

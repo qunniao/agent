@@ -1,0 +1,407 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.guding{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 100;
+}
+
+.top{
+	width: 100%;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	background: #FEF5D4;
+	display: flex;
+}
+
+.jinhuo{
+	font-size: 0.18rem;
+	color: #333;
+	padding-left: 0.15rem;
+}
+
+.search{
+	width: 100%;
+	height: 0.8rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	background: #F2F2F2;
+}
+
+.search input{
+	width: 85%;
+	height: 0.5rem;
+	border-radius: 0.25rem;
+	border: 0;
+	padding-left: 0.55rem;
+}
+
+.search img{
+	width: 0.3rem;
+	height: 0.3rem;
+	position: absolute;
+	left: 5%;
+}
+
+.classification{
+	width: 100%;
+	height: 0.7rem;
+	line-height: 0.7rem;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #fff;
+	border-bottom: 1px solid #eee;
+	font-size: 0.22rem;
+}
+
+.classificationItem{
+	width: 25%;
+	height: 100%;
+}
+
+.active{
+	color: #2DA07C;
+}
+
+.product{
+	width: 100%;
+	background: #fff;
+	display: flex;
+	margin-top: 2rem;
+}
+
+.productLeft{
+	width: 20%;
+	height: 10rem;
+	background: #F8F8F8;
+	display: flex;
+	flex-direction: column;
+	position: fixed;
+}
+
+.productLeftItem{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0.1rem 0;
+	border-bottom: 1px solid #eee;
+}
+
+.productLeftItem img{
+	width: 0.3rem;
+	height: 0.3rem;
+	border-radius: 0.05rem;
+}
+
+.productLeftItemTitle{
+	font-size: 0.18rem;
+}
+
+.acti{
+	background: #fff;
+}
+
+.productRight{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 20%;
+	padding-bottom: 1rem;
+}
+
+.title{
+	font-size: 0.18rem;
+	line-height: 0.5rem;
+	border-bottom: 1px solid #EEEEEE;
+	padding-left: 0.15rem;
+}
+
+.productItem{
+	width: 100%;
+	padding: 0.1rem 0;
+	display: flex;
+}
+
+.productItem a {
+	width: 95%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.productItem img{
+	width: 1.1rem;
+	height: 1.1rem;
+	margin-left: 0.15rem;
+	border-radius: 0.05rem;
+}
+
+.title_kucun_xiaoliang_price{
+	width: 75%;
+	display: flex;
+	flex-direction: column;
+}
+
+.productName{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	color: #333333;
+}
+
+.kucun_xiaoliang{
+	display: flex;
+	position: relative;
+	color: #A7A7A7;
+	font-size: 0.18rem;
+	margin-left: 0.15rem;
+	margin-top: 0.15rem;
+}
+
+.xiaoliang{
+	position: absolute;
+	right: 0.2rem;
+}
+
+.price_gouwuche{
+	display: flex;
+	position: relative;
+	margin-left: 0.15rem;
+	margin-top: 0.1rem;
+}
+
+.price{
+	font-size: 0.2rem;
+	color: red;
+}
+
+#gouwuchede{
+	width: 0.3rem;
+	height: 0.25rem;
+	position: absolute;
+	right: 0.2rem;
+	margin-top: 0.8rem;
+	opacity: 1;
+}
+
+.bottom{
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+}
+
+.haicha{
+	width: 100%;
+	height: 0.5rem;
+	line-height: 0.5rem;
+	background: #EAF9F2;
+	text-align: center;
+}
+
+.haichaTitle{
+	font-size: 0.18rem;
+	color: #5F6863;
+	display: flex;
+	justify-content: center;
+}
+
+.submit{
+	width: 100%;
+	height: 0.7rem;
+	background: #FFFFFF;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.gouwuche{
+	width: 0.5rem;
+	height: 0.5rem;
+	border-radius: 50%;
+	background: #584F60;
+	margin-left: 0.15rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.submit img{
+	width: 0.3rem;
+	height: 0.3rem;
+}
+
+.heji{
+	display: flex;
+	flex-direction: column;
+	margin-left: 0.15rem;
+}
+
+.hejiTop{
+	display: flex;
+	font-size: 0.2rem;
+	color: #333333;
+}
+
+.jine{
+	color: red;
+}
+
+.numyunfei{
+	font-size: 0.16rem;
+	color: #626262;
+}
+
+.jiesuananniu{
+	width: 1.5rem;
+	height: 100%;
+	background: #23BD77;
+	position: absolute;
+	right: 0;
+	font-size: 0.22rem;
+	color: #fff;
+	line-height: 0.7rem;
+	text-align: center;
+}
+
+#login{
+    display:none;
+    width:100%;
+    position:fixed;
+    bottom:0;
+    height: 4rem;
+    margin-top:-125px;
+    z-index: 1000;
+    border-top-left-radius: 0.15rem;
+    border-top-right-radius: 0.15rem;
+	background: #FFFFFF;
+	flex-direction: column;
+}
+
+#mask{
+    display:none;
+    background:rgba(0,0,0,0.4);
+    width:100%;
+    height:100%;
+	position:fixed;
+	top: -2rem;
+    z-index: 1000;
+}
+
+.img_name_price{
+	width: 100%;
+	display: flex;
+	margin-top: 0.2rem;
+}
+
+.img_name_price img{
+	width: 1.3rem;
+	height: 1.3rem;
+	margin: 0 0.15rem;
+}
+
+.name_price{
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.titlea{
+	font-size: 0.22rem;
+	color: #000;
+}
+
+.pricea{
+	font-size: 0.22rem;
+	color: red;
+	position: absolute;
+	bottom: 0.15rem;
+}
+
+.goumaishuliang{
+	margin-top: 0.5rem;
+	display: flex;
+	position: relative;
+}
+
+.shuliangtitle{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+}
+
+.goods-quantity{
+	display: flex;
+	height: 0.5rem;
+	align-items: center;
+}
+
+.goods-quantity input{
+	width: 0.5rem;
+	text-align: center;
+	background: #F5F5F5;
+	border: 0;
+	height: 0.25rem;
+}
+
+.goods-quantity button{
+	width: 0.35rem;
+	border: 0;
+	background: #F5F5F5;
+	margin: 0 0.03rem;
+	color: #CCCCCC;
+	font-size: 0.26rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.kucuna{
+	font-size: 0.18rem;
+	color: #CCCCCC;
+	padding-top: 0.03rem;
+}
+
+.toubiande{
+	position: absolute;
+	right: 0.2rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.addCard{
+	width: 100%;
+	height: 0.8rem;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.jiaru{
+	width: 1.7rem;
+	height: 100%;
+	background: #26BD76;
+	font-size: 0.24rem;
+	color: #fff;
+	position: absolute;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

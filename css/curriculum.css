@@ -1,0 +1,129 @@
+body{
+	margin: 0;
+	background: #F2F2F2;
+}
+
+.header{
+	width: 100%;
+	height: 0.7rem;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.caozuoshipin{
+	font-size: 0.22rem;
+	padding-left: 0.15rem;
+}
+
+.caozuoshipin a{
+	font-weight: normal;
+	color: #DF3246;
+}
+
+.header img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	right: 0.3rem;
+}
+
+.search{
+	width: 100%;
+	height: 0.9rem;
+	background: #fff;
+	border-top: 1px solid #F0F0F0;
+	display: flex;
+	align-items: center;
+}
+
+.search input{
+	width: 84%;
+	height: 0.5rem;
+	border-radius: 0.3rem;
+	border: 0;
+	background: #F5F6F8;
+	margin-left: 3%;
+	padding-left: 7%;
+	font-size: 0.22rem;
+	padding-right: 0.2rem;
+}
+
+.search img{
+	width: 0.25rem;
+	height: 0.25rem;
+	position: absolute;
+	left: 5%;
+}
+
+.curriculumItem{
+	width: 96%;
+	margin-left: 2%;
+	height: 2rem;
+	border-radius: 0.15rem;
+	background: #FFFFFF;
+	margin-top: 0.15rem;
+	display: flex;
+	position: relative;
+}
+
+.curriculumItem:last-child{
+	margin-bottom: 0.2rem;
+}
+
+.curriculumItem .itemImg{
+	width: 35%;
+	height: 1.6rem;
+	border-radius: 0.06rem;
+	margin-left: 0.2rem;
+	margin-top: 0.2rem;
+}
+
+.curriculumItem_right{
+	display: flex;
+	flex-direction: column;
+}
+
+.name{
+	font-size: 0.24rem;
+	color: #333333;
+	padding-top: 0.2rem;
+	padding-left: 0.15rem;
+}
+
+.content{
+	padding: 0.05rem 0.2rem;
+	background: #F5F6F8;
+	font-size: 0.2rem;
+	margin-left: 0.15rem;
+	color: #6C6D6F;
+	margin-top: 0.5rem;
+}
+
+.teacher{
+	font-size: 0.22rem;
+	color: #6A6A6A;
+	position: absolute;
+	bottom: 0.2rem;
+	padding-left: 0.15rem;
+}
+
+.jinxingzhong{
+	position: absolute;
+	bottom: 0.2rem;
+	right: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.jinxingzhong img{
+	width: 0.25rem;
+	height: 0.25rem;
+}
+
+.jinxingzhongName{
+	font-size: 0.22rem;
+	color: #3EAB81;
+	padding-left: 0.05rem;
+}

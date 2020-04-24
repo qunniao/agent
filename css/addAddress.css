@@ -1,0 +1,201 @@
+body{
+	margin: 0;
+	background: #f3f3f3;
+}
+
+.zndz{
+	width: 100%;
+	height: 0.8rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+	background: #fff;
+}
+
+.title{
+	font-size: 0.24rem;
+	color: #333333;
+	padding-left: 3%;
+}
+
+.dizhicontent{
+	font-size: 0.24rem;
+	color: #959595;
+	padding-left: 0.15rem;
+}
+
+.bottom{
+	width: 0.14rem;
+	height: 0.14rem;
+	border-bottom: 0.02rem solid #959595;
+	border-right: 0.02rem solid #959595;
+	transform: rotate(45deg);
+	position: absolute;
+	right: 0.3rem;
+	top: 0.28rem;
+}
+
+.classification{
+	width: 100%;
+	background: #FFFFFF;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.15rem;
+}
+
+.classificationItem{
+	width: 97%;
+	margin-left: 3%;
+	line-height: 0.8rem;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #E9E9E9;
+	position: relative;
+}
+
+.classificationItem:last-child{
+	border: 0;
+}
+
+.name{
+	font-size: 0.24rem;
+	color: #333333;
+}
+
+.classificationItem .input{
+	width: 80%;
+	height: 80%;
+	position: absolute;
+	right: 0;
+	border: 0;
+	font-size: 0.22rem;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.right{
+	width: 0.14rem;
+	height: 0.14rem;
+	border-top: 0.02rem solid #959595;
+	border-right: 0.02rem solid #959595;
+	transform: rotate(45deg);
+	position: absolute;
+	right: 0.2rem;
+}
+
+textarea{
+	width: 97%;
+	height: 1.5rem;
+	border: 0;
+	font-size: 0.22rem;
+	line-height: 0.5rem;
+	outline:none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.wechatDizhi{
+	width: 97%;
+	margin-left: 3%;
+	height: 0.8rem;
+	display: flex;
+	align-items: center;
+	position: relative;
+}
+
+.bzdl{
+	position: absolute;
+	right: 0.2rem;
+	display: flex;
+	align-items: center;
+}
+
+.wechat{
+	font-size: 0.22rem;
+	color: #198AD6;
+	padding-right: 0.3rem;
+}
+
+.qingkong{
+	font-size: 0.18rem;
+	border: 1px solid #C8C8C8;
+	padding: 0.03rem 0.2rem;
+	border-radius: 0.3rem;
+	color: #6A6A6A;
+}
+
+.btn {
+	width: 50px;
+	position: absolute;
+	right: 0.3rem;
+	bottom: 0.05rem;
+}
+
+.mui-switch {
+	width: 52px;
+	height: 31px;
+	position: relative;
+	border: 1px solid #dfdfdf;
+	background-color: #fdfdfd;
+	box-shadow: #dfdfdf 0 0 0 0 inset;
+	border-radius: 20px;
+	background-clip: content-box;
+	display: inline-block;
+	-webkit-appearance: none;
+	user-select: none;
+	outline: none;
+}
+
+.mui-switch:before {
+	content: '';
+	width: 29px;
+	height: 29px;
+	position: absolute;
+	top: 0px;
+	left: 0;
+	border-radius: 20px;
+	background-color: #fff;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.mui-switch:checked {
+	border-color:#53D66E;
+	/*颜色修改*/
+	box-shadow: #fd5454 0 0 0 16px inset;
+	/*颜色修改*/
+	background-color: #53D66E;
+}
+
+.mui-switch:checked:before {
+	left: 21px;
+}
+
+.mui-switch.mui-switch-animbg {
+	/*加过度效果*/
+	transition: background-color ease 0.4s;
+}
+
+.mui-switch.mui-switch-animbg:before {
+	transition: left 0.3s;
+}
+
+.mui-switch.mui-switch-animbg:checked {
+	box-shadow: #fd5454 0 0 0 0 inset;
+	/*颜色修改*/
+	background-color: #53D66E;
+	transition: border-color 0.4s, background-color ease 0.4s;
+}
+
+.submit{
+	width: 90%;
+	margin-left: 5%;
+	height: 0.8rem;
+	background: #25BE78;
+	border-radius: 0.4rem;
+	position: fixed;
+	bottom: 0.5rem;
+	color: #FFFFFF;
+	font-size: 0.26rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

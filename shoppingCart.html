@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>购物车</title>
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <link rel="stylesheet" href="./css/shoppingCart.css">
+    <script src="./js/adapt.js"></script>
+    <script src="./js/jquery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+    <script src="./js/methods.js"></script>
+</head>
+
+<body>
+    <div id="cont">
+        <div class="header">
+            <span class="gong">共{{length}}件宝贝</span>
+            <span class="edit" @click="edita">{{edit}}</span>
+        </div>
+        <div id="list" class="lasta" v-for="(item,index) in list">
+            <img v-if="item.selected" class="list_icon" @click="radios(index,item.cid)" src="imgs/gouxuan.png" />
+            <img v-else="!item.selected" class="list_icon" @click="radios(index,item.cid)" src="imgs/radio_none.png" />
+            <img class="list_img" :src="item.cover" @click="delerte(index)" />
+            <label class="list_name">{{item.productName}}</label>
+            <label class="money">￥{{item.productPrice}}</label>
+            <div class="sum_cont">
+                <label class="minute" @click="btn_minute(index,item.cid,item.weight)">-</label>
+                <input class="input" v-model="item.productNum" disabled/>
+                <label class="add" @click="btn_add(index,item.cid,item.weight)">+</label>
+            </div>
+        </div>
+
+        <div class="xiangshang"></div>
+
+        <div class="bottom">
+            <!-- <div class="allxuan" @click="quanxuan">
+                <img class="list_icon" src="imgs/radio_none.png" />
+                <span class="quanxuan">全选</span>
+            </div> -->
+            <div class="heji">
+                <label class="bott_money">合计：<b>￥{{money}}</b></label>
+                <span class="yunfei">不含运费</span>
+            </div>
+            <label class="btn_sub" id="jiesuan" @click="submit">{{jiesuan}}</label>
+        </div>
+    </div>
+
+    <script>
+        var serverHost = getServerHost()
+
+        var vue = new Vue({
+            el: "#cont",
+            data: {
+                length: 0,
+                edit: '编辑',
+                money: 0,
+                productNum: 0,
+                list: [],
+                jiesuan: "结算",
+                cid:[]
+            },
+            //初始化加载   显示总价总数量
+            created: function () {
+                var price = 0;
+                var numb = 0;
+                var list = this.list;
+                for (var i = 0; i < list.length; i++) {
+                    if (list[i].selected) {
+                        price += list[i].productNum * list[i].productPrice;
+                        numb += list[i].num;
+                    }
+                }
+                this.money = price.toFixed(2);
+                this.productNum = numb;
+            },
+            methods: {
+                //总价总数量方法
+                hh: function () {
+                    var price = 0;
+                    var numb = 0;
+                    var list = this.list;
+                    for (var i = 0; i < list.length; i++) {
+                        if (list[i].selected) {
+                            price += list[i].productNum * list[i].productPrice;
+                            numb += list[i].productNum;
+                        }
+                    }
+                    this.money = price.toFixed(2);
+                    this.productNum = numb;
+                },
+                //选中未选中
+                radios: function (index,cid) {
+                    var list = this.list;
+                    list[index].selected = !list[index].selected;
+                    this.hh();
+                    console.log(cid)
+                    if(list[index].selected == true){
+                        this.cid.push(cid)
+                    } else if(list[index].selected == false){
+                        this.cid.pop()
+                    }
+                },
+                //全选
+                quanxuan: function () {
+                    var list = this.list;
+                    for (var i in list) {
+                        list[i].selected = !list[i].selected
+                    }
+                },
+                //添加
+                btn_add: function (index,cid,weight) {
+                    console.log(weight)
+                    var list = this.list;
+                    var productNum = list[index].productNum;
+                    productNum = productNum + weight;
+                    list[index].productNum = productNum;
+                    this.hh();
+                    $.ajax({
+                        url:serverHost + '/agentCarts/changeProductNum',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            cid:cid,
+                            num:productNum
+                        },
+                        success:function(data){
+                            console.log(124213)
+                        }
+                    })
+                },
+                //减去
+                btn_minute: function (index,cid,weight) {
+                    var list = this.list;
+                    var productNum = list[index].productNum;
+                    if (productNum > weight) {
+                        productNum = productNum - weight;
+                        list[index].productNum = productNum;
+                    }
+                    this.hh();
+                    $.ajax({
+                        url:serverHost + '/agentCarts/changeProductNum',
+                        type:'post',
+                        dataType:'json',
+                        data:{
+                            cid:cid,
+                            num:productNum
+                        },
+                        success:function(data){
+                            console.log(124213)
+                        }
+                    })
+                },
+                findData: function () {
+                    var that = vue;
+                    $.ajax({
+                        url: serverHost+'/agentCarts/queryList',
+                        type: 'get',
+                        dataType: 'json',
+                        data: {
+                            agentId: localStorage.uid
+                        },
+                        success: function (data) {
+                            that.list = data.data;
+                            that.length = data.data.length
+                        }
+                    })
+                },
+                submit: function () {
+                    if (this.jiesuan == '删除') {
+                        if(this.productNum == 0){
+                            layer.open({
+                                content: '请先选择商品'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            });
+                        } else {
+                            $.ajax({
+                                url: serverHost + '/agentCarts/delete?cids='+this.cid,
+                                type:'DELETE',
+                                success:function(data){
+                                    layer.open({
+                                        content: '删除成功'
+                                        ,skin: 'msg'
+                                        ,time: 2 //2秒后自动关闭
+                                    });
+                                    setTimeout(function () {
+                                        window.location.reload();
+                                    }, 1000);
+                                }
+                            })
+                        }
+                    } else if (this.jiesuan == '结算') {
+                        if(this.productNum == 0){
+                            layer.open({
+                                content: '请先选择商品'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            });
+                        } else {
+                            window.location.href = 'confirmationOfOrder.html?cIds='+this.cid
+                        }
+                    }
+                },
+                edita: function () {
+                    if (this.edit == '编辑') {
+                        this.edit = '完成';
+                        this.jiesuan = '删除';
+                        document.getElementById('jiesuan').style.background = 'red'
+                    } else if (this.edit == '完成') {
+                        this.edit = '编辑';
+                        this.jiesuan = '结算';
+                        document.getElementById('jiesuan').style.background = '#23BD77'
+                    }
+                }
+            }
+        })
+        vue.findData()
+    </script>
+</body>
+
+</html>

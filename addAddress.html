@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/addAddress.css"/>
+	    <script type="text/javascript" src="js/jquery.js"></script>
+	    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/jquery.js"></script>
+		<script src="./js/methods.js"></script>
+		<script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+		<title>添加地址</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="classification">
+				<div class="classificationItem">
+					<span class="name">收货人</span>
+					<input type="text" placeholder="请填写收货人姓名" v-model="contactName" id="name" class="input"/>
+				</div>
+				<div class="classificationItem">
+					<span class="name">手机号码</span>
+					<input type="text" placeholder="请填写收货人手机号" v-model="contactPhone" id="phone" class="input"/>
+				</div>
+			</div>
+			<div class="classification">
+				<!-- <div class="classificationItem">
+					<span class="name">所在地区</span>
+					<input type="text" placeholder="请选择地区" class="input"/>
+					<span class="right"></span>
+				</div> -->
+				<div class="classificationItem">
+					<textarea placeholder="请输入您的收货地址" v-model="contactAddress" id="address"></textarea>
+				</div>
+			</div>
+			<div class="classification">
+				<div class="classificationItem">
+					<span class="name">设为默认地址</span>
+					<label class="btn"><input class="mui-switch mui-switch-animbg" id="kaiguan" type="checkbox" @click="zhuangtai"></label>
+				</div>
+			</div>
+			<div class="submit" @click="submit">
+				保存并使用
+			</div>
+		</div>
+	</body>
+</html>
+<script>
+	var serverHost = getServerHost()
+
+	//获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId
+	var id = getUrlParam('id');
+	var type = getUrlParam('type');
+	console.log(type)
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			asd:0,
+			contactName:'',
+			contactPhone:'',
+			contactAddress:''
+		},
+		methods: {
+			findData:function(){
+				if(type == 'edit'){
+					document.title = '修改地址'
+				}
+				var that = app;
+				if(id != null){
+					$.ajax({
+						url:serverHost+'/userAddresss/info/'+id,
+						type:'get',
+						dataType:'json',
+						success:function(data){
+							that.contactName = data.data.contactName
+							that.contactPhone = data.data.contactPhone
+							that.contactAddress = data.data.contactAddress
+						}
+					})
+				}
+			},
+			submit:function(){
+				var contactName = $('#name').val();
+				var contactPhone = $("#phone").val();
+				var address = $("#address").val();
+				var userAddress = {'contactAddress':address,'contactName':contactName,'contactPhone':contactPhone,'isDefaultAddress':this.asd,'uid':localStorage.uid}
+				var userAddressa = {'id':id,'contactAddress':address,'contactName':contactName,'contactPhone':contactPhone,'isDefaultAddress':this.asd,'uid':localStorage.uid}
+				if(contactName == ''){
+					layer.open({
+						content: '请填写收货人姓名'
+						,skin: 'msg'
+						,time: 2
+					});
+					return false;
+				} else if(contactPhone == ''){
+					layer.open({
+						content: '请填写收货人手机号码'
+						,skin: 'msg'
+						,time: 2
+					});
+					return false;
+				} else if(!(/^1(3|5|7|8)\d{9}$/.test(contactPhone))){
+					layer.open({
+						content: '手机号码填写错误'
+						,skin: 'msg'
+						,time: 2
+					});
+					return false;
+				} else if(address == ''){
+					layer.open({
+						content: '请输入您的收货地址'
+						,skin: 'msg'
+						,time: 2
+					});
+					return false;
+				}
+				if(type == 'add'){
+					$.ajax({
+						url:serverHost+'/userAddresss/save',
+						type:'post',
+						dataType:'json',
+						headers:{
+							'Content-Type': "application/json;charset=UTF-8"
+						},
+						data:JSON.stringify(userAddress),
+						success:function(data){
+							if(data.code == 200){
+								layer.open({
+									content: '地址添加成功'
+									,skin: 'msg'
+									,time: 2 //2秒后自动关闭
+								});
+								setTimeout(function () {
+									window.location.href = 'myAddress.html'
+								}, 1000);
+							}
+						}
+					})
+				} else if(type=="edit"){
+					$.ajax({
+						url:serverHost+'/userAddresss/update',
+						type:'put',
+						dataType:'json',
+						headers:{
+							'Content-Type': "application/json;charset=UTF-8"
+						},
+						data:JSON.stringify(userAddressa),
+						success:function(data){
+							if(data.code == 200){
+								layer.open({
+									content: '地址修改成功'
+									,skin: 'msg'
+									,time: 2 //2秒后自动关闭
+								});
+								setTimeout(function () {
+									window.location.href = 'myAddress.html'
+								}, 1000);
+							}
+						}
+					})
+				}
+			},
+			zhuangtai:function(){
+				if(document.getElementById('kaiguan').checked){
+					this.asd = 1
+				} else {
+					this.asd = 0
+				}
+			}
+		},
+	})
+	app.findData()
+</script>

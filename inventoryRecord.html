@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	    <link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/inventoryRecord.css"/>
+	    <script type="text/javascript" src="js/jquery.js"></script>
+	    <script src="js/adapt.js" type="text/javascript" charset="utf-8"></script>
+	    <script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title>库存记录</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<div class="search">
+					<input type="text" placeholder="搜索"/>
+					<img src="imgs/search.png"/>
+				</div>
+				<div class="shaixuan" :id="dianji">
+					<span class="shaixuanTitle" style="color: {{color}};">筛选</span>
+					<img src="imgs/screen.png"/>
+				</div>
+			</div>
+			<div id="mask"></div>
+		    <div id="login">
+		    	<div class="classification">
+		    		<span class="classificationTitle">变更类型</span>
+		    		<div class="classificationList">
+		    			<div class="classificationItem">
+		    				<span class="classificationName">给下级发货</span>
+		    			</div>
+		    			<div class="classificationItem">
+		    				<span class="classificationName">给下级发货</span>
+		    			</div>
+		    			<div class="classificationItem">
+		    				<span class="classificationName">给下级发货</span>
+		    			</div>
+		    			<div class="classificationItem">
+		    				<span class="classificationName">给下级发货</span>
+		    			</div>
+		    		</div>
+		    	</div>
+		        <div class="quxiao_quding">
+		        	<div class="asd" @click="close">
+		        		<span class="quxiao">重置</span>
+		        	</div>
+		        	<div class="asd" @click="close">
+		        		<span class="queding" @click="close">确定</span>
+		        	</div>
+		        </div>
+		    </div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			dianji:'btn',
+			color:"red"
+		},
+		methods:{
+			close(){
+				mask.style.display="none";
+            	login.style.display="none";
+            	this.dianji = 'btn'
+			},
+			findData:function(){
+				var that = app;
+				var btn=document.getElementById("btn");
+		        var mask=document.getElementById("mask");
+		        var login=document.getElementById("login");
+		        btn.onclick=function(){
+		            mask.style.display="block";
+		            login.style.display="block";
+		            that.dianji = 'col'
+		        };
+		        var close_login=document.getElementById("mask");
+		        close_login.onclick=function(){
+		            mask.style.display="none";
+		            login.style.display="none";
+		            that.dianji = 'btn'
+		        }
+			}
+		}
+	})
+	app.findData()
+</script>

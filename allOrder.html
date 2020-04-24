@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+		<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+		<link rel="stylesheet" type="text/css" href="css/allOrder.css"/>
+		<script src="./js/adapt.js"></script>
+		<script src="./js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+		<script src="./js/methods.js"></script>
+		<title>订单列表</title>
+	</head>
+	<body>
+		<div id="app">
+			<div class="header">
+				<div class="leixing">
+					<span class="leixingTitle">全部类型</span>
+					<img src="imgs/GoBottom.png"/>
+				</div>
+				<div class="search">
+					<input type="text"/>
+					<img src="imgs/search.png"/>
+				</div>
+			</div>
+			<div class="classificationList">
+				<div class="classificationItem" @click="fukuan(0)">
+					<span class="classificationItemTitle active">全部</span>
+				</div>
+				<div class="classificationItem" @click="fukuan(1)">
+					<span class="classificationItemTitle">待付款</span>
+				</div>
+				<div class="classificationItem" @click="fukuan(2)">
+					<span class="classificationItemTitle">待发货</span>
+				</div>
+				<div class="classificationItem" @click="fukuan(3)">
+					<span class="classificationItemTitle">已发货</span>
+				</div>
+			</div>
+			<div class="orderItem" v-for="item in order">
+				<div class="orderDetails" @click="goDetails(item.oid)">
+					<div class="oderItemTop">
+						<span class="cai">采</span>
+						<span class="number">{{item.orderNumber}}</span>
+						<span class="leixinga" v-if="item.orderState==4">待发货</span>
+						<span class="leixinga" v-else-if="item.orderState==2">待付款</span>
+						<span class="leixinga" v-else-if="item.orderState==5">已发货</span>
+					</div>
+					<div class="orderDetails">
+						<!-- <div class="labelList">
+							<span class="lableItem">云订单</span>
+							<span class="lableItem">首进</span>
+						</div> -->
+						<div class="orderImgList">
+							<div class="imgList" v-for="(itema,index) in item.orderProductList" v-if="index<3">
+								<img :src="itema.cover"/>
+							</div>
+							<div class="totalNum">
+								<span class="total">共{{item.orderProductList.length}}件</span>
+								<span class="right"></span>
+							</div>
+						</div>
+						<div class="totalPrice">
+							<span class="totalPirceName">合计：￥{{item.totalPrice}}</span>
+						</div>
+					</div>
+				</div>
+				<div class="zhifu" @click="submit(item.oid)" v-if="item.orderState==2">
+					<span>立即支付</span>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<script type="text/javascript">
+
+	var serverHost = getServerHost()
+
+	var app = new Vue({
+		el:'#app',
+		data:{
+			order:[{
+				orderProductList:[]
+			}],
+			length:0
+		},
+		methods: {
+			findData:function(){
+				var that = app;
+				$.ajax({
+					url:serverHost + '/orderInfos/list',
+					type:'get',
+					dataType:'json',
+					data:{
+						current:1,
+						size:20,
+						agentId:localStorage.uid
+					},
+					success:function(data){
+						that.order = data.data.records;
+						for(var i in that.order){
+							that.length = that.order[i].orderProductList.length
+							console.log(that.length)
+						}
+					}
+				})
+			},
+			goDetails:function(e){
+				window.location.href = 'orderDetails.html?oid='+e+'&type='+'liji'
+			},
+			fukuan:function(e){
+				var that = app;
+				var typeId;
+				if(e == 1){
+					typeId = 2;
+				} else if(e == 2){
+					typeId = 4;
+				} else if(e == 3){
+					typeId = 5;
+				} else if(e == 0){
+					typeId = '';
+				}
+				$.ajax({
+					url:serverHost+'/orderInfos/list',
+					type:'get',
+					dataType:'json',
+					data:{
+						current:1,
+						size:20,
+						orderState:typeId,
+						agentId:localStorage.uid
+					},
+					success:function(data){
+						that.order = data.data.records;
+					}
+				})
+			},
+			submit:function(e){
+				window.location.href = 'cashier.html?orderId='+e
+			}
+		},
+	})
+	app.findData()
+
+	let filter = document.getElementsByClassName("classificationItemTitle")
+	for(let i=0;i<filter.length;i++){
+		filter[i].addEventListener('click',function(){
+			filter[i].classList.add('active')
+			var typeId = i;
+			for(let j=0;j<filter.length;j++){
+				if(i!=j){
+					filter[j].classList.remove('active')
+				}
+			}
+		})
+	}
+</script>

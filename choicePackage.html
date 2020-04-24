@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <link rel="stylesheet" type="text/css" href="css/footer.css" />
+    <link rel="stylesheet" type="text/css" href="css/choicePackage.css" />
+    <script src="./js/adapt.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/methods.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.bootcss.com/layer/3.1.0/mobile/layer.js"></script>
+    <title>加盟店注册</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <div class="header">
+            <span class="grade">当前等级: VIP399套餐</span>
+            <span class="reSelection">重新选择</span>
+        </div> -->
+        <div id="package">
+            <div class="package" v-for="(item,index) in taocan">
+                <img :src="item.cover">
+                <div class="name_price_choose">
+                    <span class="packageName">{{item.title}}</span>
+                    <span class="packagePrice">￥{{item.price}}</span>
+                    <span class="choose" :class="{'active':currentSort==item.gid}" :key="index"
+                        @click="productClass(index,item.gid,item.price)">选择</span>
+                </div>
+            </div>
+        </div>
+        <div class="packageProduct" id="packageProduct">
+            <div class="package" v-for="item in taocanProduct">
+                <img :src="item.cover">
+                <div class="name_price_choose">
+                    <span class="packageName">{{item.productName}}</span>
+                    <span class="packagePrice">￥{{item.stockPrice}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="all">已加载全部</div>
+        <div class="bottom">
+            <span class="money">金额: <b>￥{{price}}</b></span>
+            <div class="weixuanze_xiadan">
+                <button class="submit" id="next" @click="next">下一步</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script type="text/javascript">
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    //接收URL中的参数booksId  decodeURI(escape(nick))
+    var levelId = getUrlParam('levelId');
+    var contactName = getUrlParam('contactName');
+    var contactPhone = getUrlParam('contactPhone');
+    var contactAddress = getUrlParam('contactAddress');
+    var agentId = getUrlParam('agentId');
+    console.log(agentId)
+
+    var serverHost = getServerHost()
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            taocan: [],
+            currentSort: 0,
+            taocanProduct:[],
+            price:0,
+            list:[]
+        },
+        methods: {
+            findData: function () {
+                var that = app;
+                $.ajax({
+                    url: serverHost + '/groupPackages/list/levelId',
+                    type: 'get',
+                    data: {
+                        levelId: levelId
+                    },
+                    success: function (data) {
+                        that.taocan = data.data
+                    }
+                })
+            },
+            productClass: function (index,gid,price) {
+                this.currentSort = gid;
+                this.price = price
+            },
+            next: function () {
+                var that = this;
+                if(that.currentSort == 0){
+                    layer.open({
+						content: '请先选择套餐'
+						,skin: 'msg'
+						,time: 2 //2秒后自动关闭
+					})
+                } else {
+                    var nextText = document.getElementById('next')
+                    if(nextText.innerHTML == '下一步'){
+                        nextText.innerHTML = '提交订单';
+                        document.getElementById('package').style.display = 'none';
+                        $.ajax({
+                            url:serverHost + '/groupPackages/info/'+that.currentSort,
+                            type:'get',
+                            dataType:'json',
+                            success:function(data){
+                                that.taocanProduct = data.data.groupProductVoList
+                                for(var i in that.taocanProduct){
+                                    var asdad = {"pid":that.taocanProduct[i].pid,"productName":that.taocanProduct[i].productName,"productPrice":that.taocanProduct[i].price,'productNum':1}
+                                    that.list.push(asdad)
+                                }
+                                console.log(that.list)
+                            }
+                        })
+                    } else if(nextText.innerHTML == '提交订单'){
+                        console.log(that.list)
+                        var namea = decodeURI(escape(contactName))
+                        var addressa = decodeURI(escape(contactAddress))
+                        // var productId = that.currentSort
+                        var orderInfoDto = {"inviter":0,"orderType":1,"agentId":agentId,"contactName":namea,"contactPhone":contactPhone,"contactAddress":addressa,"orderProductDtoList":that.list,"isFirst":1,"isCloud":1,"freight":0,"sendWay":1,"storePersonId":0}
+                        $.ajax({
+                            url:serverHost+'/orderInfos/save',
+                            type:'post',
+                            dataType:'json',
+                            headers:{
+                                'Content-Type': "application/json;charset=UTF-8"
+                            },
+                            data:JSON.stringify(orderInfoDto),
+                            success:function(data){
+                                localStorage.setItem('orderId',data.data)
+                                window.location.href = 'cashier.html?type=' +'zhuce&price='+that.price+'&orderId='+data.data+'&agentId='+agentId
+                            }
+                        })
+                    }
+                }
+            }
+        },
+    })
+    app.findData()
+
+    //调用服务器后台微信支付接口获取签名参数
+    function getWxPayParms() {
+        console.log(agentId)
+        /*
+        	接口返回值示例
+        	{
+        		"payload": {
+        			"nonce_str": "hP1hFpv5ppXTNPkP",
+        			"appid": "wxf2677d625e6881f4",
+        			"sign": "6F324B29C199FBEA152E091C978A64F6137E9BE509A847EEB0ACF97FCC0E0E21",
+        			"trade_type": "JSAPI",
+        			"return_msg": "OK",
+        			"result_code": "SUCCESS",
+        			"mch_id": "1561270971",
+        			"return_code": "SUCCESS",
+        			"prepay_id": "wx08165625885508d9366d28b91055243800"
+        		},
+        		"success": true,
+        		"msg": null,
+        		"code": -1,
+        		"timestamp": 1573203385
+        	}
+        */
+        var serverHost = "http://admin.zhanchengwlkj.com:8080/derivative_system_applet";
+        $.ajax({
+            url: serverHost + '/pay/agentWxPay',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                orderId: localStorage.orderId,
+                agentId: agentId
+            },
+            success: function (data) {
+                console.log(data);
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                    }
+                } else {
+                    onBridgeReady(data);
+                }
+            }
+
+        })
+
+    }
+
+    //调用微信支付
+    function onBridgeReady(data) {
+        console.log(2112411)
+        var timestamp = (new Date()).getTime();
+        var package = "prepay_id=" + data.prepay_id;
+        WeixinJSBridge.invoke(
+            'getBrandWCPayRequest', {
+                "appId": data.data.appId, //公众号名称，由商户传入     
+                "timeStamp": data.data.timeStamp, //时间戳，自1970年以来的秒数     
+                "nonceStr": data.data.nonceStr, //随机串     
+                "package": data.data.package,
+                "signType": "MD5", //微信签名方式：     
+                "paySign": data.data.sign //微信签名 
+            },
+            function (res) {
+                if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    // 使用以上方式判断前端返回,微信团队郑重提示：
+                    //res.err_msg将在用户支付成功后返回ok，但并不保证它绝对可靠。
+                }
+            });
+    }
+</script>
